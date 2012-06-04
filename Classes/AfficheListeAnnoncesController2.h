@@ -19,6 +19,7 @@
     UITableView *tableView1;
     UIButton *boutonPrix;
     UIButton *boutonSurface;
+    UIButton *boutonDate;
     ProgressViewContoller *pvc;
 }
 

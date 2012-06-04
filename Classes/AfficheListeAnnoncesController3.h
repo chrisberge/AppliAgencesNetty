@@ -5,6 +5,7 @@
 //  Created by Christophe Bergé on 12/07/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+//  CLASSE CREE POUR FAVORIS
 
 #import <UIKit/UIKit.h>
 #import "Annonce.h"
@@ -19,6 +20,7 @@
     UITableView *tableView1;
     UIButton *boutonPrix;
     UIButton *boutonSurface;
+    UIButton *boutonDate;
     ProgressViewContoller *pvc;
 }
 

@@ -391,7 +391,7 @@
     AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"multicriteres";
     
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Transact_Immo&id_agence=225&";
+    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&";
     
     NSEnumerator *enume;
     NSString *key;
@@ -666,6 +666,7 @@
                                                       otherButtonTitles:nil];
                 [alert show];
                 [alert release];
+                [criteres1 setValue:@"" forKey:@"cp1"];
             }
         }
         else{

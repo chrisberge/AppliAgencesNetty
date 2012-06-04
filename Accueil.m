@@ -241,7 +241,7 @@
     /*--- QUEUE POUR LES REQUETES HTTP ---*/
     
     /*--- REQUETE COVERFLOW ---*/
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Transact_Immo&id_agence=225&coverflow=YES";
+    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&coverflow=YES";
     
     NSLog(@"bodyString:%@\n",bodyString);
     
@@ -251,7 +251,7 @@
     /*--- REQUETE COVERFLOW ---*/
     
     /*--- REQUETE VILLES ET CODES POSTAUX ---*/
-    bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Transact_Immo&id_agence=225&villes=YES";
+    bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&villes=YES";
     
     NSLog(@"bodyString:%@\n",bodyString);
     

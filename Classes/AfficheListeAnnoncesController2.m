@@ -91,13 +91,218 @@
     [bandeauFavoris release];
     
     //BANDEAU VIERGE
-    UIImageView *vierge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-vierge.png"]];
+    UIImageView *vierge; /*= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-vierge.png"]];
     [vierge setFrame:CGRectMake(0,72,320,20)];
     [self.view addSubview:vierge];
-    [vierge release];
+    [vierge release];*/
+    
+    //CRITERES
+    if (([criteres valueForKey:@"prix_mini"] != NULL) || ([criteres valueForKey:@"prix_maxi"] != NULL)) {
+        
+        UILabel *labelPrix = [[UILabel alloc] initWithFrame:CGRectMake(10, 72, 320, 20)];
+        labelPrix.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
+        labelPrix.textAlignment = UITextAlignmentLeft;
+        labelPrix.backgroundColor = [UIColor clearColor];
+        labelPrix.textColor = [UIColor colorWithRed:244.0 green:0.0 blue:161.0 alpha:1.0];
+        
+        NSString *text = @"";
+        text = [self setTextMinMax:@"prix" unit:@"€" texte:text];
+        
+        labelPrix.text = text;
+        [self.view addSubview:labelPrix];
+        [labelPrix release];
+    }
+    
+    UILabel *secondLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 92, 320, 20)];
+    secondLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
+    secondLabel.textAlignment = UITextAlignmentLeft;
+    secondLabel.backgroundColor = [UIColor clearColor];
+    
+    BOOL criterePrinted = NO;
+    
+    if ([criteres valueForKey:@"types"] != NULL) {
+    
+        criterePrinted = YES;
+        
+        NSArray *typesPossibles = [NSArray arrayWithObjects:
+                                   @"Appartement",
+                                   @"Maison",
+                                   @"Terrain",
+                                   @"Bureau",
+                                   @"Commerce",
+                                   @"Immeuble",
+                                   @"Parking",
+                                   @"Autre",
+                                   nil
+                                   ];
+        
+        NSArray *types = [[criteres valueForKey:@"types"] componentsSeparatedByString:@","];
+        
+        NSString *text = @"";
+        NSString *virgule = @",";
+        int cpt = 0;
+        
+        for (NSString *type in types) {
+            cpt++;
+            if (cpt == [types count]) {
+                virgule = @"";
+            }
+            text = [text stringByAppendingFormat:@"%@%@",[typesPossibles objectAtIndex:[type intValue]], virgule];
+        }
+        
+        secondLabel.text = text;
+    }
+    
+    if (([criteres valueForKey:@"nb_pieces_mini"] != NULL) && ([criteres valueForKey:@"nb_pieces_maxi"] != NULL)) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @", ";
+        }
+        
+        criterePrinted = YES;
+        
+        NSString *isS = @"";
+        
+        if ([[criteres valueForKey:@"nb_pieces_maxi"] intValue] > 1) {
+            isS = @"s";
+        }
+        
+        if ([[criteres valueForKey:@"nb_pieces_mini"] intValue] == [[criteres valueForKey:@"nb_pieces_maxi"] intValue]) {
+            secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@ piece%@",
+                                text,
+                                [criteres valueForKey:@"nb_pieces_mini"],
+                                isS
+                                ];
+        }
+        else{
+            secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@-%@ pieces",
+                                text,
+                                [criteres valueForKey:@"nb_pieces_mini"],
+                                [criteres valueForKey:@"nb_pieces_maxi"]];
+        }
+    }
+    
+    if (([criteres valueForKey:@"surface_mini"] != NULL) && ([criteres valueForKey:@"surface_maxi"] != NULL)) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @", ";
+        }
+        
+        criterePrinted = YES;
+    
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@-%@m²",
+                            text,
+                            [criteres valueForKey:@"surface_mini"],
+                            [criteres valueForKey:@"surface_maxi"]];
+    }
+    
+    if (([criteres valueForKey:@"surface_mini"] == NULL) && ([criteres valueForKey:@"surface_maxi"] != NULL)) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @", ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@<%@m²",
+                            text,
+                            [criteres valueForKey:@"surface_maxi"]];
+    }
+    
+    if (([criteres valueForKey:@"surface_mini"] != NULL) && ([criteres valueForKey:@"surface_maxi"] == NULL)) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @", ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@>%@m²",
+                            text,
+                            [criteres valueForKey:@"surface_mini"]];
+    }
+    
+    if ([criteres valueForKey:@"ville1"] != NULL) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @" ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@ %@",
+                            text,
+                            [criteres valueForKey:@"ville1"],
+                            [criteres valueForKey:@"cp1"]
+                            ];
+    }
+    
+    if ([criteres valueForKey:@"ville2"] != NULL) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @" ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@ %@",
+                            text,
+                            [criteres valueForKey:@"ville2"],
+                            [criteres valueForKey:@"cp2"]
+                            ];
+    }
+    
+    if ([criteres valueForKey:@"ville3"] != NULL) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @" ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@ %@",
+                            text,
+                            [criteres valueForKey:@"ville3"],
+                            [criteres valueForKey:@"cp3"]
+                            ];
+    }
+    
+    if ([criteres valueForKey:@"ville4"] != NULL) {
+        
+        NSString *text = @"";
+        
+        if (criterePrinted) {
+            text = @" ";
+        }
+        
+        criterePrinted = YES;
+        
+        secondLabel.text = [secondLabel.text stringByAppendingFormat:@"%@%@ %@",
+                            text,
+                            [criteres valueForKey:@"ville4"],
+                            [criteres valueForKey:@"cp4"]
+                            ];
+    }
+    
+    [self.view addSubview:secondLabel];
+    [secondLabel release];
     
     //CRITERES DANS LE BANDEAU
-    UIScrollView *textScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 72, 320, 20)];
+    /*UIScrollView *textScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 72, 320, 20)];
     textScroll.contentSize = CGSizeMake(640, 20);
     textScroll.userInteractionEnabled = YES;
     textScroll.scrollsToTop = YES;
@@ -153,13 +358,13 @@
     [self.view addSubview:textScroll];
     
     [criteresTextView release];
-    [textScroll release];
+    [textScroll release];*/
     
     //BOUTON TRIS
     //PAR PRIX
     boutonPrix = [UIButton buttonWithType:UIButtonTypeCustom];
 	
-	[boutonPrix setFrame:CGRectMake(40, 95, 120, 50)];
+	[boutonPrix setFrame:CGRectMake(48, 115, 72, 30)];
 	[boutonPrix setUserInteractionEnabled:YES];
 	[boutonPrix addTarget:self action:@selector(buttonPrixPushed:) 
                forControlEvents:UIControlEventTouchUpInside];
@@ -175,7 +380,7 @@
     //PAR SURFACE
     boutonSurface = [UIButton buttonWithType:UIButtonTypeCustom];
 	
-	[boutonSurface setFrame:CGRectMake(162, 95, 120, 50)];
+	[boutonSurface setFrame:CGRectMake(122, 115, 72, 30)];
 	[boutonSurface setUserInteractionEnabled:YES];
 	[boutonSurface addTarget:self action:@selector(buttonSurfacePushed:) 
          forControlEvents:UIControlEventTouchUpInside];
@@ -187,6 +392,22 @@
     boutonSurface.tag = 11;
 	
 	[self.view addSubview:boutonSurface];
+    
+    //PAR DATE
+    boutonDate = [UIButton buttonWithType:UIButtonTypeCustom];
+	
+	[boutonDate setFrame:CGRectMake(195, 115, 72, 30)];
+	[boutonDate setUserInteractionEnabled:YES];
+	[boutonDate addTarget:self action:@selector(buttonDatePushed:) 
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    image = [UIImage imageNamed:@"date-middle.png"];
+	[boutonDate setImage:image forState:UIControlStateNormal];
+    
+    boutonDate.showsTouchWhenHighlighted = NO;
+    boutonDate.tag = 111;
+	
+	[self.view addSubview:boutonDate];
     
     //BANDEAU VIERGE
     vierge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-vierge.png"]];
@@ -213,7 +434,7 @@
     
     //TABLE VIEW
     tableView1 = [[UITableView alloc] init];
-    [tableView1 setFrame:CGRectMake(0, 170, 320, 250)];
+    [tableView1 setFrame:CGRectMake(0, 170, 320, 235)];
     tableView1.delegate = self;
     tableView1.dataSource = self;
     //tableView1.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cell.png"]];
@@ -247,6 +468,8 @@
 	UIButton *button = sender;
     UIImage *image = [UIImage imageNamed:@"m2-middle.png"];
     [boutonSurface setImage:image forState:UIControlStateNormal];
+    image = [UIImage imageNamed:@"date-middle.png"];
+    [boutonDate setImage:image forState:UIControlStateNormal];
     
     NSSortDescriptor *sortDescriptor;
     NSArray *sortDescriptors;
@@ -293,6 +516,8 @@
 	UIButton *button = sender;
     UIImage *image = [UIImage imageNamed:@"prix-middle.png"];
     [boutonPrix setImage:image forState:UIControlStateNormal];
+    image = [UIImage imageNamed:@"date-middle.png"];
+    [boutonDate setImage:image forState:UIControlStateNormal];
     
     NSSortDescriptor *sortDescriptor;
     NSArray *sortDescriptors;
@@ -320,6 +545,54 @@
             [button setImage:image forState:UIControlStateNormal];
             //TRIER LES ANNONCES PAR PRIX EN ORDRE CROISSANT
             sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"surface"
+                                                          ascending:YES
+                                                           selector:@selector(localizedStandardCompare:)] autorelease];
+            sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            sortedArray = [listeAnnonces sortedArrayUsingDescriptors:sortDescriptors];
+            [listeAnnonces release];
+            listeAnnonces = nil;
+            listeAnnonces = [[NSMutableArray alloc] initWithArray:sortedArray];
+            [tableView1 reloadData];
+            break;
+		default:
+			break;
+	}
+}
+
+- (void) buttonDatePushed:(id)sender
+{
+	UIButton *button = sender;
+    UIImage *image = [UIImage imageNamed:@"prix-middle.png"];
+    [boutonPrix setImage:image forState:UIControlStateNormal];
+    image = [UIImage imageNamed:@"m2-middle.png"];
+    [boutonSurface setImage:image forState:UIControlStateNormal];
+    
+    NSSortDescriptor *sortDescriptor;
+    NSArray *sortDescriptors;
+    NSArray *sortedArray;
+	switch (button.tag) {
+		case 111:
+            button.tag = 112;
+            image = [UIImage imageNamed:@"date-down.png"];
+            [button setImage:image forState:UIControlStateNormal];
+            //TRIER LES ANNONCES PAR PRIX EN ORDRE DECROISSANT
+            
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"date"
+                                                          ascending:NO
+                                                           selector:@selector(localizedStandardCompare:)] autorelease];
+            sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            sortedArray = [listeAnnonces sortedArrayUsingDescriptors:sortDescriptors];
+            [listeAnnonces release];
+            listeAnnonces = nil;
+            listeAnnonces = [[NSMutableArray alloc] initWithArray:sortedArray];
+            [tableView1 reloadData];
+			break;
+		case 112:
+            button.tag = 111;
+            image = [UIImage imageNamed:@"date-up.png"];
+            [button setImage:image forState:UIControlStateNormal];
+            //TRIER LES ANNONCES PAR PRIX EN ORDRE CROISSANT
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"date"
                                                           ascending:YES
                                                            selector:@selector(localizedStandardCompare:)] autorelease];
             sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
@@ -393,6 +666,8 @@
     
     [NSThread detachNewThreadSelector:@selector(loadImage:) toTarget:self withObject:[NSArray arrayWithObjects:cell, uneAnnonce, nil]];
     
+    cell.textLabel.textColor = [UIColor colorWithRed:244.0 green:0.0 blue:161.0 alpha:1.0];
+    
     NSNumber *formattedResult;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setGroupingSeparator:@" "];
@@ -407,16 +682,28 @@
     
     [formatter release];
     
-	NSString *ville = [uneAnnonce valueForKey:@"ville"];
-	NSString *texte = [[NSString alloc] initWithFormat:@"%@ € - %@",prix,ville];
+    NSString *texte = [[NSString alloc] initWithFormat:@"%@ €",prix];
 	
 	cell.textLabel.text = texte;
 	
 	//SOUS TITRE
+    cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.textColor = [UIColor blackColor];
+    
 	NSString *codePostal = [uneAnnonce valueForKey:@"cp"];
+    codePostal = [codePostal stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    NSString *ville = [uneAnnonce valueForKey:@"ville"];
+    ville = [ville stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
 	NSString *surface = [uneAnnonce valueForKey:@"surface"];
-	NSString *nbPieces = [uneAnnonce valueForKey:@"nb_pieces"];
+    surface = [surface stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+	
+    NSString *nbPieces = [uneAnnonce valueForKey:@"nb_pieces"];
     nbPieces = [nbPieces stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    NSString *type = [uneAnnonce valueForKey:@"type"];
+    type = [type stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
     NSString *isS = @"";
     
@@ -424,7 +711,14 @@
         isS = @"s";
     }
     
-	NSString *subTitle = [[NSString alloc] initWithFormat:@"%@ - %@ m² - %@ piece%@",codePostal,surface,nbPieces,isS];
+	NSString *subTitle = [[NSString alloc] initWithFormat:@"%@ %@m², %@ piece%@\n%@ %@",
+                          type,
+                          surface,
+                          nbPieces,
+                          isS,
+                          ville,
+                          codePostal
+                          ];
 	cell.detailTextLabel.text = subTitle;
 	
 	[texte release];
@@ -510,16 +804,17 @@
     NSString *critMin = [NSString stringWithFormat:@"%@_mini", critere];
     NSString *critMax = [NSString stringWithFormat:@"%@_maxi", critere];
     NSString *sMin = @"";
-    NSString *sMax =@"s";
+    NSString *sMax = @"";
     
     
     if (unit == @"piece") {
+        sMax = @"s";    
         if ([critMin intValue] > 1) {
             sMin = @"s";
         }
     }
     
-    if ([criteres valueForKey:critMin] != @"" && [criteres valueForKey:critMax] != @"") {
+    if ([criteres valueForKey:critMin] != NULL && [criteres valueForKey:critMax] != NULL) {
         
         NSNumber *formattedResult;
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -532,12 +827,12 @@
         formattedResult = [NSNumber numberWithInt:[[criteres valueForKey:critMax] intValue]];
         NSString *maxi = [formatter stringForObjectValue:formattedResult];
         
-        text = [text stringByAppendingFormat:@" - De %@ %@%@ à %@ %@%@",mini, unit, sMin, maxi, unit, sMax];
+        text = [text stringByAppendingFormat:@"%@ %@%@ à %@ %@%@",mini, unit, sMin, maxi, unit, sMax];
         
         [formatter release];
     }
     
-    if ([criteres valueForKey:critMin] != @"" && [criteres valueForKey:critMax] == @"") {
+    if ([criteres valueForKey:critMin] != NULL && [criteres valueForKey:critMax] == NULL) {
         
         NSNumber *formattedResult;
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -547,12 +842,12 @@
         formattedResult = [NSNumber numberWithInt:[[criteres valueForKey:critMin] intValue]];
         NSString *mini = [formatter stringForObjectValue:formattedResult];
         
-        text = [text stringByAppendingFormat:@" - A partir de %@ %@%@",mini, unit, sMin];
+        text = [text stringByAppendingFormat:@"A partir de %@ %@%@",mini, unit, sMin];
         
         [formatter release];
     }
     
-    if ([criteres valueForKey:critMin] == @"" && [criteres valueForKey:critMax] != @"") {
+    if ([criteres valueForKey:critMin] == NULL && [criteres valueForKey:critMax] != NULL) {
         
         NSNumber *formattedResult;
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -562,7 +857,7 @@
         formattedResult = [NSNumber numberWithInt:[[criteres valueForKey:critMax] intValue]];
         NSString *maxi = [formatter stringForObjectValue:formattedResult];
         
-        text = [text stringByAppendingFormat:@" - Jusqu'à %@ %@%@",maxi, unit, sMax];
+        text = [text stringByAppendingFormat:@"Jusqu'à %@ %@%@",maxi, unit, sMax];
         
         [formatter release];
     }

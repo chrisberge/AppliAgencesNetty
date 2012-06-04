@@ -484,6 +484,7 @@
             if(bien1 != nil)
             {
                 [annonceSelected setValue:[bien1 valueForKey:@"ref"] forKey:@"ref"];
+                [annonceSelected setValue:[bien1 valueForKey:@"type"] forKey:@"type"];
                 [annonceSelected setValue:[bien1 valueForKey:@"nb_pieces"] forKey:@"nb_pieces"];
                 [annonceSelected setValue:[bien1 valueForKey:@"surface"] forKey:@"surface"];
                 [annonceSelected setValue:[bien1 valueForKey:@"ville"] forKey:@"ville"];
@@ -496,13 +497,14 @@
                 [annonceSelected setValue:[bien1 valueForKey:@"etage"] forKey:@"etage"];
                 [annonceSelected setValue:[bien1 valueForKey:@"ascenseur"] forKey:@"ascenseur"];
                 [annonceSelected setValue:[bien1 valueForKey:@"chauffage"] forKey:@"chauffage"];
+                [annonceSelected setValue:[bien1 valueForKey:@"date"] forKey:@"date"];
             }
             
             [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
             
-            AfficheAnnonceController4 *afficheAnnonceController1 = [[AfficheAnnonceController4 alloc] init];
-            [self.navigationController pushViewController:afficheAnnonceController1 animated:YES];
-            [afficheAnnonceController1 release];
+            AfficheAnnonceController4 *afficheAnnonceControllerBien1 = [[AfficheAnnonceController4 alloc] init];
+            [self.navigationController pushViewController:afficheAnnonceControllerBien1 animated:YES];
+            [afficheAnnonceControllerBien1 release];
             break;
         case 201:
             NSLog(@"Bien 2");
@@ -511,6 +513,7 @@
             if(bien2 != nil)
             {
                 [annonceSelected setValue:[bien2 valueForKey:@"ref"] forKey:@"ref"];
+                [annonceSelected setValue:[bien2 valueForKey:@"type"] forKey:@"type"];
                 [annonceSelected setValue:[bien2 valueForKey:@"nb_pieces"] forKey:@"nb_pieces"];
                 [annonceSelected setValue:[bien2 valueForKey:@"surface"] forKey:@"surface"];
                 [annonceSelected setValue:[bien2 valueForKey:@"ville"] forKey:@"ville"];
@@ -523,13 +526,14 @@
                 [annonceSelected setValue:[bien2 valueForKey:@"etage"] forKey:@"etage"];
                 [annonceSelected setValue:[bien2 valueForKey:@"ascenseur"] forKey:@"ascenseur"];
                 [annonceSelected setValue:[bien2 valueForKey:@"chauffage"] forKey:@"chauffage"];
+                [annonceSelected setValue:[bien2 valueForKey:@"date"] forKey:@"date"];
             }
             
             [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
             
-            AfficheAnnonceController4 *afficheAnnonceController2 = [[AfficheAnnonceController4 alloc] init];
-            [self.navigationController pushViewController:afficheAnnonceController2 animated:YES];
-            [afficheAnnonceController2 release];
+            AfficheAnnonceController4 *afficheAnnonceControllerBien2 = [[AfficheAnnonceController4 alloc] init];
+            [self.navigationController pushViewController:afficheAnnonceControllerBien2 animated:YES];
+            [afficheAnnonceControllerBien2 release];
             break;
         default:
 			break;
@@ -552,7 +556,7 @@
     //whichView = @"favoris";
     NSMutableDictionary *criteres1 = [recherchesSauvees objectAtIndex:num];
     
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Transact_Immo&id_agence=225&";
+    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&";
     
     NSEnumerator *enume;
     NSString *key;

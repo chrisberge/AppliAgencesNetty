@@ -12,6 +12,7 @@
 @implementation Annonce
 
 @synthesize ref,
+            type,
             nb_pieces,
             surface,
             ville,
@@ -23,10 +24,12 @@
             etage,
             ascenseur,
             chauffage,
-            photos;
+            photos,
+            date;
 
 - (void) dealloc {
     [ref release];
+    [type release];
 	[nb_pieces release];
 	[surface release];
 	[ville release];
@@ -39,6 +42,7 @@
     [etage release];
     [ascenseur release];
     [chauffage release];
+    [date release];
 	[super dealloc];
 }
 

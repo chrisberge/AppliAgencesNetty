@@ -109,6 +109,8 @@
 		83955D791506647800BBB710 /* achat.png in Resources */ = {isa = PBXBuildFile; fileRef = 83955D761506647800BBB710 /* achat.png */; };
 		83955D7A1506647800BBB710 /* coche.png in Resources */ = {isa = PBXBuildFile; fileRef = 83955D771506647800BBB710 /* coche.png */; };
 		83955D7B1506647800BBB710 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 83955D781506647800BBB710 /* location.png */; };
+		839A2DFA157BA1C200AF64AC /* date-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 839A2DF9157BA1C200AF64AC /* date-middle.png */; };
+		839A2DFC157BA1CC00AF64AC /* date-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 839A2DFB157BA1CC00AF64AC /* date-up.png */; };
 		839AC6E713DC60DF006CEA9C /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = 839AC6E613DC60DF006CEA9C /* header.png */; };
 		83A0DDB11253440500DD5A75 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A0DDB01253440500DD5A75 /* CoreData.framework */; };
 		83A1700013E74B6200A8A4CD /* AFOpenFlowViewDiapo.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A16FFF13E74B6200A8A4CD /* AFOpenFlowViewDiapo.m */; };
@@ -324,6 +326,8 @@
 		83955D761506647800BBB710 /* achat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = achat.png; path = Images/achat.png; sourceTree = SOURCE_ROOT; };
 		83955D771506647800BBB710 /* coche.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = coche.png; path = Images/coche.png; sourceTree = SOURCE_ROOT; };
 		83955D781506647800BBB710 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location.png; path = Images/location.png; sourceTree = SOURCE_ROOT; };
+		839A2DF9157BA1C200AF64AC /* date-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date-middle.png"; sourceTree = "<group>"; };
+		839A2DFB157BA1CC00AF64AC /* date-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "date-up.png"; sourceTree = "<group>"; };
 		839AC6E613DC60DF006CEA9C /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = header.png; sourceTree = "<group>"; };
 		83A0DD9A125342B800DD5A75 /* AppliAgencesNetty.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = AppliAgencesNetty.xcdatamodel; sourceTree = "<group>"; };
 		83A0DDB01253440500DD5A75 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -641,6 +645,8 @@
 			isa = PBXGroup;
 			children = (
 				838891CE1505010200968B35 /* bandeau-resultat-recherche.png */,
+				839A2DF9157BA1C200AF64AC /* date-middle.png */,
+				839A2DFB157BA1CC00AF64AC /* date-up.png */,
 				83C4CBC713D0D578002CB110 /* m2-down.png */,
 				83C4CBC813D0D578002CB110 /* m2-middle.png */,
 				83C4CBC913D0D578002CB110 /* m2-up.png */,
@@ -1164,6 +1170,8 @@
 				83CA32191520CC1900F1D159 /* fax-agence.txt in Resources */,
 				8395513715230C740039E5ED /* nom-appli.txt in Resources */,
 				83C715B9152DED7900638B42 /* AppliAgencesNetty.sqlite in Resources */,
+				839A2DFA157BA1C200AF64AC /* date-middle.png in Resources */,
+				839A2DFC157BA1CC00AF64AC /* date-up.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

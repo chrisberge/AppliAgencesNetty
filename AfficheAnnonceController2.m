@@ -112,18 +112,19 @@
     
     /*--- CRITERES ---*/
     
-    UILabel *labelPrix = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 170, 20)];
+    UILabel *labelPrix = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 75, 20)];
     labelPrix.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
     labelPrix.textAlignment = UITextAlignmentLeft;
     labelPrix.backgroundColor = [UIColor clearColor];
+    labelPrix.textColor = [UIColor colorWithRed:244.0 green:0.0 blue:161.0 alpha:1.0];
     
     UILabel *labelVille = [[UILabel alloc] initWithFrame:CGRectMake(10, 25, 320, 20)];
-    labelVille.font = [UIFont fontWithName:@"Arial" size:10];
+    labelVille.font = [UIFont fontWithName:@"Arial" size:11];
     labelVille.textAlignment = UITextAlignmentLeft;
     labelVille.backgroundColor = [UIColor clearColor];
     
-    UILabel *labelSurface = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, 320, 20)];
-    labelSurface.font = [UIFont fontWithName:@"Arial" size:10];
+    UILabel *labelSurface = [[UILabel alloc] initWithFrame:CGRectMake(90, 10, 320, 20)];
+    labelSurface.font = [UIFont fontWithName:@"Arial-BoldMT" size:11];
     labelSurface.textAlignment = UITextAlignmentLeft;
     labelSurface.backgroundColor = [UIColor clearColor];
     
@@ -148,18 +149,18 @@
     
     [formatter release];
     
-    labelPrix.text = [NSString stringWithFormat:@"%@€", prix];
+    labelPrix.text = [NSString stringWithFormat:@"%@ €", prix];
     
     labelVille.text = [NSString stringWithFormat:@"%@ - %@",
-                       [lAnnonce valueForKey:@"ville"],
-                       [lAnnonce valueForKey:@"cp"]
+                       [[lAnnonce valueForKey:@"ville"] substringFromIndex:1],
+                       [[lAnnonce valueForKey:@"cp"] substringFromIndex:1]
                        ];
     
-    labelSurface.text = [NSString stringWithFormat:@"%@ - %@ piece%@- %@m²",
-                         [lAnnonce valueForKey:@"ref"],
+    labelSurface.text = [NSString stringWithFormat:@"%@ %@m², %@ piece%@",
+                         [lAnnonce valueForKey:@"type"],
+                         [lAnnonce valueForKey:@"surface"],
                          nb_pieces,
-                         isS,
-                         [lAnnonce valueForKey:@"surface"]
+                         isS
                          ];
     
     [scrollView addSubview:labelPrix];
@@ -215,7 +216,7 @@
     [description release];
     
     //TEXTE
-    UITextView *descriptif = [[UITextView alloc] initWithFrame:CGRectMake(0, 226, 320, 70)];
+    UITextView *descriptif = [[UITextView alloc] initWithFrame:CGRectMake(0, 226, 320, 100)];
     descriptif.text = [lAnnonce valueForKey:@"descriptif"];
     descriptif.backgroundColor = [UIColor clearColor];
     descriptif.editable = NO;
@@ -818,6 +819,7 @@
     
     NSDictionary *recordAnnonce = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    [lAnnonce valueForKey:@"ref"], @"ref",
+                                   [lAnnonce valueForKey:@"type"], @"type",
                                    nbPieces, @"nb_pieces",
                                    [lAnnonce valueForKey:@"surface"], @"surface",
                                    [lAnnonce valueForKey:@"ville"], @"ville",
@@ -830,6 +832,7 @@
                                    [lAnnonce valueForKey:@"etage"], @"etage",
                                    [lAnnonce valueForKey:@"ascenseur"], @"ascenseur",
                                    [lAnnonce valueForKey:@"chauffage"], @"chauffage",
+                                   [lAnnonce valueForKey:@"date"], @"date",
                                    nil];
     
     NSLog(@"Annonce record: %@", recordAnnonce);

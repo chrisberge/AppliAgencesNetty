@@ -281,7 +281,7 @@
 	[networkQueue setRequestDidFailSelector:@selector(requestFailed:)];
 	[networkQueue setDelegate:self];
     /*--- QUEUE POUR LES REQUETES HTTP ---*/
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Transact_Immo&id_agence=225&coverflow=YES";
+    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&coverflow=YES";
     
     NSLog(@"bodyString:%@\n",bodyString);
     

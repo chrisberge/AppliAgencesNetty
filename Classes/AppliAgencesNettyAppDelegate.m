@@ -55,7 +55,7 @@
     /******/
 
 	/*** VUE ONGLET FAVORIS***/
-	favorisView = [[Favoris alloc] init];
+	favorisView = [[Favoris2 alloc] init];
     
     UINavigationController *tableNavControllerFavoris = [[[UINavigationController alloc] initWithRootViewController:favorisView] autorelease];
 	

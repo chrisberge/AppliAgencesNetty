@@ -838,23 +838,31 @@
     NSLog(@"Annonce record: %@", recordAnnonce);
     
     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSDictionary *save1 = [NSDictionary dictionaryWithContentsOfFile:[directory stringByAppendingPathComponent:@"bien1.plist"]];
-    NSDictionary *save2 = [NSDictionary dictionaryWithContentsOfFile:[directory stringByAppendingPathComponent:@"bien2.plist"]];
+    NSMutableArray *biensSauves = [[NSMutableArray alloc] init];
     
-    if (save1 == nil ){
-        [recordAnnonce writeToFile:[directory stringByAppendingPathComponent:@"bien1.plist"] atomically:YES];
-    }
-    else {
-        if (save2 == nil) {
-            [recordAnnonce writeToFile:[directory stringByAppendingPathComponent:@"bien2.plist"] atomically:YES];
+    for (int i = 1; i < 11; i++) {
+        NSString *name = [NSString stringWithFormat:@"bien%d.plist", i];
+        NSDictionary *bien = [NSDictionary dictionaryWithContentsOfFile:
+                              [directory stringByAppendingPathComponent:name]];
+        if (bien != nil) {
+            [biensSauves addObject:bien];
         }
     }
     
-    if (save2 != nil) {
-        [save2 writeToFile:[directory stringByAppendingPathComponent:@"bien1.plist"] atomically:YES];
-        [recordAnnonce writeToFile:[directory stringByAppendingPathComponent:@"bien2.plist"] atomically:YES];
+    if ([biensSauves count] == 0) {
+        [recordAnnonce writeToFile:[directory stringByAppendingPathComponent:@"bien1.plist"] atomically:YES];
     }
-    
+    else{
+        [biensSauves insertObject:recordAnnonce atIndex:0];
+        if ([biensSauves count] == 11) {
+            [biensSauves removeLastObject];
+        }
+        for (int j = 1; j < [biensSauves count] + 1; j++) {
+            NSDictionary *save = [biensSauves objectAtIndex:j - 1];
+            NSString *name = [NSString stringWithFormat:@"bien%d.plist", j];
+            [save writeToFile:[directory stringByAppendingPathComponent:name] atomically:YES];
+        }
+    }
 }
 
 - (void)viewDidUnload

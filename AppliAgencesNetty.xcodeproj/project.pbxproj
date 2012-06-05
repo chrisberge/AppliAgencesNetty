@@ -90,6 +90,7 @@
 		8382738613A0167C0037561B /* Biens.xml in Resources */ = {isa = PBXBuildFile; fileRef = 8382738513A0167C0037561B /* Biens.xml */; };
 		8382A3DB13CDC49600D74331 /* AfficheAnnonceController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382A3DA13CDC49600D74331 /* AfficheAnnonceController2.m */; };
 		8386BF5713E14A6D00BF91AB /* recherche-multicriteres.png in Resources */ = {isa = PBXBuildFile; fileRef = 8386BF5613E14A6D00BF91AB /* recherche-multicriteres.png */; };
+		8387184C157E416B00B13231 /* Favoris2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387184B157E416A00B13231 /* Favoris2.m */; };
 		8387E92F13D4843F0044FEAC /* RechercheCarte2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387E92E13D4843F0044FEAC /* RechercheCarte2.m */; };
 		8387EA8313D4DB240044FEAC /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387EA7613D4DB240044FEAC /* ASIDataCompressor.m */; };
 		8387EA8413D4DB240044FEAC /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8387EA7813D4DB240044FEAC /* ASIDataDecompressor.m */; };
@@ -292,6 +293,8 @@
 		8382A3D913CDC49600D74331 /* AfficheAnnonceController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceController2.h; sourceTree = "<group>"; };
 		8382A3DA13CDC49600D74331 /* AfficheAnnonceController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceController2.m; sourceTree = "<group>"; };
 		8386BF5613E14A6D00BF91AB /* recherche-multicriteres.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recherche-multicriteres.png"; sourceTree = "<group>"; };
+		8387184A157E416A00B13231 /* Favoris2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Favoris2.h; sourceTree = "<group>"; };
+		8387184B157E416A00B13231 /* Favoris2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Favoris2.m; sourceTree = "<group>"; };
 		8387E92D13D4843F0044FEAC /* RechercheCarte2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechercheCarte2.h; sourceTree = "<group>"; };
 		8387E92E13D4843F0044FEAC /* RechercheCarte2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechercheCarte2.m; sourceTree = "<group>"; };
 		8387EA6313D4D6020044FEAC /* libxml2.2.7.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.7.3.dylib; path = usr/lib/libxml2.2.7.3.dylib; sourceTree = SDKROOT; };
@@ -839,6 +842,8 @@
 				83BA4CAB11FB0EFE00EBCA67 /* Favoris.h */,
 				83BA4CAC11FB0EFE00EBCA67 /* Favoris.m */,
 				83BA4CAD11FB0EFE00EBCA67 /* Favoris.xib */,
+				8387184A157E416A00B13231 /* Favoris2.h */,
+				8387184B157E416A00B13231 /* Favoris2.m */,
 			);
 			name = Favoris;
 			sourceTree = "<group>";
@@ -1230,6 +1235,7 @@
 				83C715AE152DD99600638B42 /* XMLParserVilles.m in Sources */,
 				83C715B1152DD9C400638B42 /* Ville.m in Sources */,
 				83C715B4152DDCFC00638B42 /* ChoixVilleController3.m in Sources */,
+				8387184C157E416B00B13231 /* Favoris2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

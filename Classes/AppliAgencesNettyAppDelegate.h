@@ -11,18 +11,18 @@
 #import "Utility.h"
 #import "Accueil.h"
 #import "ContactViewController.h"
-#import "Favoris.h"
+#import "Favoris2.h"
 #import "AgenceViewController.h"
 
 @class Accueil;
 @class AgenceViewController;
-@class Favoris;
+@class Favoris2;
 
 @interface AppliAgencesNettyAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
 	UITabBarController *tabBarController;
 	Accueil *accueilView;
-	Favoris *favorisView;
+	Favoris2 *favorisView;
 	AgenceViewController *agenceView;
 	ContactViewController *contactView;
     BOOL isAccueil;
@@ -39,7 +39,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) UITabBarController *tabBarController;
 @property (nonatomic, retain) Accueil *accueilView;
-@property (nonatomic, retain) Favoris *favorisView;
+@property (nonatomic, retain) Favoris2 *favorisView;
 @property (nonatomic, retain) AgenceViewController *agenceView;
 @property (nonatomic, retain) ContactViewController *contactView;
 @property (nonatomic, assign) BOOL isAccueil;

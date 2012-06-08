@@ -73,7 +73,7 @@
 	NSInteger tag = -1;
 	
 	tableNavController.tabBarItem = [utility getItem:@"" imagePath:@"/accueil.png" tag:tag++];
-    tableNavController.tabBarItem.title = @"Accueil";
+    tableNavController.tabBarItem.title = @"Biens";
     
     tableNavControllerFavoris.tabBarItem = [utility getItem:@"" imagePath:@"/favoris.png" tag:tag++];
     tableNavControllerFavoris.tabBarItem.title = @"Favoris";

@@ -104,7 +104,7 @@
         labelPrix.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
         labelPrix.textAlignment = UITextAlignmentLeft;
         labelPrix.backgroundColor = [UIColor clearColor];
-        labelPrix.textColor = [UIColor colorWithRed:244.0 green:0.0 blue:161.0 alpha:1.0];
+        labelPrix.textColor = [UIColor colorWithRed:197.0 green:47.0 blue:121.0 alpha:1.0];
         
         NSString *text = @"";
         text = [self setTextMinMax:@"prix" unit:@"€" texte:text];

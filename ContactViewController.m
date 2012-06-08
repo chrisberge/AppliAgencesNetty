@@ -16,6 +16,11 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)coordonneesDidFinish:(Coordonnees *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -145,7 +150,7 @@
     /*--- BOUTON EMAIL ---*/
     UIButton *boutonEmail = [UIButton buttonWithType:UIButtonTypeCustom];
 	
-	[boutonEmail setFrame:CGRectMake(20, 240, 280, 70)];
+	[boutonEmail setFrame:CGRectMake(20, 240, 135, 70)];
 	[boutonEmail setUserInteractionEnabled:YES];
 	[boutonEmail addTarget:self action:@selector(buttonPushed:) 
               forControlEvents:UIControlEventTouchUpInside];
@@ -159,8 +164,25 @@
 	[self.view addSubview:boutonEmail];
     /*--- BOUTON EMAIL ---*/
     
+    /*--- BOUTON COORDONNEES ---*/
+    UIButton *boutonCoord = [UIButton buttonWithType:UIButtonTypeCustom];
+	
+	[boutonCoord setFrame:CGRectMake(165, 240, 135, 70)];
+	[boutonCoord setUserInteractionEnabled:YES];
+	[boutonCoord addTarget:self action:@selector(buttonPushed:) 
+          forControlEvents:UIControlEventTouchUpInside];
+    
+    image = [UIImage imageNamed:@"bouton-coordonnees.png"];
+	[boutonCoord setImage:image forState:UIControlStateNormal];
+    
+    boutonCoord.showsTouchWhenHighlighted = NO;
+    boutonCoord.tag = 7;
+	
+	[self.view addSubview:boutonCoord];
+    /*--- BOUTON COORDONNEES ---*/
+    
     /*--- LABEL EMAIL ---*/
-    UILabel *labelEmail = [[UILabel alloc] initWithFrame:CGRectMake(95, 260, 200, 30)];
+    /*UILabel *labelEmail = [[UILabel alloc] initWithFrame:CGRectMake(95, 260, 200, 30)];
     labelEmail.font = [UIFont fontWithName:@"Arial-BoldMT" size:14];
     //labelEmail.textColor = [UIColor whiteColor];
     labelEmail.backgroundColor = [UIColor clearColor];
@@ -174,7 +196,7 @@
     
     [self.view addSubview:labelEmail];
     
-    [labelEmail release];
+    [labelEmail release];*/
     /*--- LABEL EMAIL ---*/
     
     /*--- BOUTON EMAIL RECOMMANDATION ---*/
@@ -297,6 +319,14 @@
             NSString *urlAgence = [[NSString stringWithFormat:texte] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlAgence]];
             break;
+        case 7:
+            NSLog(@"coordonnees.");
+            Coordonnees *coord = [[Coordonnees alloc] init];
+            coord.delegate = self;
+            coord.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentModalViewController:coord animated:YES];
+            [coord release];
+			break;
 		default:
 			break;
 	}

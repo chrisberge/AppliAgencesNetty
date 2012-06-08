@@ -20,7 +20,7 @@
 @class XMLParser;
 @class AppliAgencesNettyAppDelegate;
 
-@interface Favoris2 : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface Favoris2 : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>{
     UITableView *tableView1;
     NSMutableArray *recherchesSauvees;
     NSMutableArray *biensSauves;
@@ -56,6 +56,7 @@
     ProgressViewContoller *pvc;
     
     Annonce *annonceSelected;
+    int indexASupprimer;
 }
 
 @property (nonatomic, assign) NSString *whichView;

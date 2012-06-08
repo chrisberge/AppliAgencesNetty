@@ -137,7 +137,7 @@
 	[supprimerRangee1 addTarget:self action:@selector(buttonSupprimerPushed:) 
                forControlEvents:UIControlEventTouchUpInside];
     
-    image = [UIImage imageNamed:@"bouton-supprimer.png"];
+    image = [UIImage imageNamed:@"bouton-supprimer-recherche.png"];
 	[supprimerRangee1 setImage:image forState:UIControlStateNormal];
     
     supprimerRangee1.showsTouchWhenHighlighted = NO;
@@ -187,7 +187,7 @@
 	[supprimerRangee2 addTarget:self action:@selector(buttonSupprimerPushed:) 
                forControlEvents:UIControlEventTouchUpInside];
     
-    image = [UIImage imageNamed:@"bouton-supprimer.png"];
+    image = [UIImage imageNamed:@"bouton-supprimer-recherche.png"];
 	[supprimerRangee2 setImage:image forState:UIControlStateNormal];
     
     supprimerRangee2.showsTouchWhenHighlighted = NO;
@@ -237,7 +237,7 @@
 	[supprimerRangee3 addTarget:self action:@selector(buttonSupprimerPushed:) 
                forControlEvents:UIControlEventTouchUpInside];
     
-    image = [UIImage imageNamed:@"bouton-supprimer.png"];
+    image = [UIImage imageNamed:@"bouton-supprimer-recherche.png"];
 	[supprimerRangee3 setImage:image forState:UIControlStateNormal];
     
     supprimerRangee3.showsTouchWhenHighlighted = NO;
@@ -733,6 +733,7 @@
                     }
                 }
                 
+                
                 switch (i) {
                     case 0:
                         labelType1.text = typeString;
@@ -985,12 +986,21 @@
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     NSDictionary *bien = [NSDictionary dictionaryWithDictionary:[biensSauves objectAtIndex:indexPath.row]];
     
-	//IMAGE
+	//IMAGE DICLOSURE BUTTON
+    UIImage *image = [UIImage   imageNamed:@"bouton-supprimer.png"];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGRect frame = CGRectMake(44.0, 44.0, image.size.width, image.size.height);
+    button.frame = frame;
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+    
+    [button addTarget:self action:@selector(accessoryButtonTapped:event:)  forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
+    cell.accessoryView = button;
     
 	/*NSString *string = [uneAnnonce valueForKey:@"photos"];
      NSLog(@"string photos: %@",string);*/
     
-    UIImage *image= [UIImage imageNamed:@"appareil-photo-photographie-icone-6076-64.png"];
+    image= [UIImage imageNamed:@"appareil-photo-photographie-icone-6076-64.png"];
     [cell.imageView setImage:image];
     
     [NSThread detachNewThreadSelector:@selector(loadImage:) toTarget:self withObject:[NSArray arrayWithObjects:cell, bien, nil]];
@@ -1060,32 +1070,18 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"index: %d", indexPath.row);
-    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *name = [NSString stringWithFormat:@"bien%d.plist", indexPath.row + 1];
-    NSString *path = [directory stringByAppendingPathComponent:name];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSError *error1 = nil;
-	
-	[fileManager removeItemAtPath:path error:&error1];
     
-    [biensSauves removeObjectAtIndex:indexPath.row];
+    indexASupprimer = indexPath.row;
     
-    for (int j = 1; j < [biensSauves count] + 1; j++) {
-        NSDictionary *save = [biensSauves objectAtIndex:j - 1];
-        NSString *nom = [NSString stringWithFormat:@"bien%d.plist", j];
-        [save writeToFile:[directory stringByAppendingPathComponent:nom] atomically:YES];
-    }
-    
-    name = [NSString stringWithFormat:@"bien%d.plist", [biensSauves count] + 1];
-    path = [directory stringByAppendingPathComponent:name];
-    
-    [fileManager removeItemAtPath:path error:&error1];
-    
-    [self getBiens];
-    
-    [tableView1 reloadData];
-    
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Supprimer des favoris?"
+                          message: @"Appuyez sur OK pour supprimer ce bien de la liste des favoris."
+                          delegate: self
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:@"Annuler",nil];
+    [alert show];
+    [alert release];
+
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1167,6 +1163,52 @@
         [iv release];
         [pool release];
     }
+}
+
+- (void)accessoryButtonTapped:(id)sender event:(id)event
+{
+	NSSet *touches = [event allTouches];
+	UITouch *touch = [touches anyObject];
+	CGPoint currentTouchPosition = [touch locationInView:tableView1];
+	NSIndexPath *indexPath = [tableView1 indexPathForRowAtPoint: currentTouchPosition];
+	if (indexPath != nil)
+		
+	{
+        [self tableView: tableView1 accessoryButtonTappedForRowWithIndexPath: indexPath];
+	}
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 0) {
+		NSLog(@"user pressed OK");
+        NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *name = [NSString stringWithFormat:@"bien%d.plist", indexASupprimer + 1];
+        NSString *path = [directory stringByAppendingPathComponent:name];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSError *error1 = nil;
+        
+        [fileManager removeItemAtPath:path error:&error1];
+        
+        [biensSauves removeObjectAtIndex:indexASupprimer];
+        
+        for (int j = 1; j < [biensSauves count] + 1; j++) {
+            NSDictionary *save = [biensSauves objectAtIndex:j - 1];
+            NSString *nom = [NSString stringWithFormat:@"bien%d.plist", j];
+            [save writeToFile:[directory stringByAppendingPathComponent:nom] atomically:YES];
+        }
+        
+        name = [NSString stringWithFormat:@"bien%d.plist", [biensSauves count] + 1];
+        path = [directory stringByAppendingPathComponent:name];
+        
+        [fileManager removeItemAtPath:path error:&error1];
+        
+        [self getBiens];
+        
+        [tableView1 reloadData];
+	}
+	else {
+		NSLog(@"user pressed Annuler");
+	}
 }
 
 @end

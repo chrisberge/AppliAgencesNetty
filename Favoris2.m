@@ -558,7 +558,7 @@
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
-                                                                object:recherchesSauvee];
+                                                                object:rechercheSauvee];
             break;
         case 13:
             NSLog(@"Mod Recherche 3");
@@ -572,7 +572,7 @@
             }
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
-                                                                object:recherchesSauvee];
+                                                                object:rechercheSauvee];
             break;
         default:
 			break;

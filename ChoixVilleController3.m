@@ -87,11 +87,19 @@
     
     //TEXTE EN BAS
     messageBas = [[UILabel alloc] initWithFrame:CGRectMake(0, 361, 320, 50)];
-    messageBas.text = @"Aucune ville sélectionnée";
+    if ([villes count] == 0) {
+        messageBas.text = @"Aucune ville sélectionnée";
+    }
     messageBas.textAlignment = UITextAlignmentCenter;
     messageBas.font = [UIFont fontWithName:@"Arial" size:8];
     messageBas.numberOfLines = 0;
     [self.view addSubview:messageBas];
+    
+    villes = [[NSMutableArray alloc] init];
+    selectedRows = [[NSMutableArray alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getCriteres" object: nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getIndexPaths" object: nil];
     
     //Add the search bar
     /*searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -103,9 +111,6 @@
     
 	searching = YES;
 	letUserSelectRow = YES;
-    
-    villes = [[NSMutableArray alloc] init];
-    selectedRows = [[NSMutableArray alloc] init];
     
     //REQUETE CORE DATA
     AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -150,8 +155,6 @@
 	
 	resultsController = fetchedResultsController;
     //[fetchedResultsController release];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getCriteres" object: nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"getIndexPaths" object: nil];
 }
 
 
@@ -190,7 +193,7 @@
         NSString *code = [criteres valueForKey:cp];
         NSString *commune = [criteres valueForKey:ville];
         
-        if (code != @"") {
+        if (code != @"" && code != nil) {
         
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                                   code, @"code",
@@ -246,6 +249,19 @@
     NSManagedObject *info = [resultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [info valueForKey:@"commune"];
     cell.detailTextLabel.text = [info valueForKey:@"code"];
+    
+    for (NSDictionary *ville in villes) {
+        NSLog(@"Ville Tab : %@", [ville valueForKey:@"commune"]);
+        NSLog(@"Ville Info : %@", [info valueForKey:@"commune"]);
+        if (([[ville valueForKey:@"commune"] isEqualToString:[info valueForKey:@"commune"]]) &&
+            ([[ville valueForKey:@"code"] isEqualToString:[info valueForKey:@"code"]])) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [selectedRows addObject:indexPath];
+        }
+        else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    }
     
     if ([selectedRows containsObject:indexPath]) {
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;

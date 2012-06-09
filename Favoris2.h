@@ -14,6 +14,7 @@
 #import "AfficheAnnonceController4.h"
 #import "ProgressViewContoller.h"
 #import "AppliAgencesNettyAppDelegate.h"
+#import "RootViewController.h"
 
 @class RootViewController;
 @class ASINetworkQueue;
@@ -28,6 +29,14 @@
     UIButton *boutonRangee1;
     UIButton *boutonRangee2;
     UIButton *boutonRangee3;
+    
+    UIButton *modifierRangee1;
+    UIButton *modifierRangee2;
+    UIButton *modifierRangee3;
+    
+    UIButton *supprimerRangee1;
+    UIButton *supprimerRangee2;
+    UIButton *supprimerRangee3;
     
     BOOL noRecherche;
     UILabel *labelType1;

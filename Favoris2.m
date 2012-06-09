@@ -114,7 +114,7 @@
 	[scrollView addSubview:boutonRangee1];
     /*------ INFOS ------*/
     /*------ MODIFIER ------*/
-    UIButton *modifierRangee1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    modifierRangee1 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[modifierRangee1 setFrame:CGRectMake(220, 220, 90, 45)];
 	[modifierRangee1 setUserInteractionEnabled:YES];
@@ -130,7 +130,7 @@
 	[scrollView addSubview:modifierRangee1];
     /*------ MODIFIER ------*/
     /*------ SUPPRIMER ------*/
-    UIButton *supprimerRangee1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    supprimerRangee1 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[supprimerRangee1 setFrame:CGRectMake(220, 275, 90, 45)];
 	[supprimerRangee1 setUserInteractionEnabled:YES];
@@ -164,7 +164,7 @@
 	[scrollView addSubview:boutonRangee2];
     /*------ INFOS ------*/
     /*------ MODIFIER ------*/
-    UIButton *modifierRangee2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    modifierRangee2 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[modifierRangee2 setFrame:CGRectMake(220, 330, 90, 45)];
 	[modifierRangee2 setUserInteractionEnabled:YES];
@@ -180,7 +180,7 @@
 	[scrollView addSubview:modifierRangee2];
     /*------ MODIFIER ------*/
     /*------ SUPPRIMER ------*/
-    UIButton *supprimerRangee2 = [UIButton buttonWithType:UIButtonTypeCustom];
+     supprimerRangee2 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[supprimerRangee2 setFrame:CGRectMake(220, 385, 90, 45)];
 	[supprimerRangee2 setUserInteractionEnabled:YES];
@@ -214,7 +214,7 @@
 	[scrollView addSubview:boutonRangee3];
     /*------ INFOS ------*/
     /*------ MODIFIER ------*/
-    UIButton *modifierRangee3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    modifierRangee3 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[modifierRangee3 setFrame:CGRectMake(220, 440, 90, 45)];
 	[modifierRangee3 setUserInteractionEnabled:YES];
@@ -230,7 +230,7 @@
 	[scrollView addSubview:modifierRangee3];
     /*------ MODIFIER ------*/
     /*------ SUPPRIMER ------*/
-    UIButton *supprimerRangee3 = [UIButton buttonWithType:UIButtonTypeCustom];
+    supprimerRangee3 = [UIButton buttonWithType:UIButtonTypeCustom];
 	
 	[supprimerRangee3 setFrame:CGRectMake(220, 495, 90, 45)];
 	[supprimerRangee3 setUserInteractionEnabled:YES];
@@ -349,12 +349,15 @@
 }
 
 - (void) afficheListeAnnoncesReadyFavoris:(NSNotification *)notify {
+    
+    
     NSLog(@"criteres2: %@", criteres2);
-    NSLog(@"tableau Annonces: %@", tableauAnnonces1);
+    NSLog(@"tableau Annonces FAV: %@", tableauAnnonces1);
+    
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:criteres2 copyItems:NO];
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:tableauAnnonces1 copyItems:NO];
     NSArray *criteresEtAnnonces = [NSArray arrayWithObjects:dict, array, nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"afficheListeAnnoncesFavoris" object: criteresEtAnnonces];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"afficheListeAnnoncesFavoris" object: criteresEtAnnonces];
 }
 
 - (void) buttonInfosPushed:(id)sender
@@ -526,30 +529,50 @@
     //RootViewController *rechercheMultiCriteres;
     AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    NSMutableDictionary *rechercheSauvee;
+    
 	switch (button.tag) {
 		case 11:
             NSLog(@"Mod Recherche 1");
             appDelegate.whichView = @"favoris_modifier";
             
             [self.navigationController pushViewController:rechercheMulti animated:YES];
+            
+            rechercheSauvee = [recherchesSauvees objectAtIndex:0];
+            if (rechercheSauvee == nil) {
+                rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
-                                                                object:[recherchesSauvees objectAtIndex:0]];
+                                                                object:rechercheSauvee];
 			break;
 		case 12:
             NSLog(@"Mod Recherche 2");
             appDelegate.whichView = @"favoris_modifier";
             
             [self.navigationController pushViewController:rechercheMulti animated:YES];
+            
+            rechercheSauvee = [recherchesSauvees objectAtIndex:1];
+            if (rechercheSauvee == nil) {
+                rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
-                                                                object:[recherchesSauvees objectAtIndex:1]];
+                                                                object:recherchesSauvee];
             break;
         case 13:
             NSLog(@"Mod Recherche 3");
             appDelegate.whichView = @"favoris_modifier";
             
             [self.navigationController pushViewController:rechercheMulti animated:YES];
+            
+            rechercheSauvee = [recherchesSauvees objectAtIndex:2];
+            if (rechercheSauvee == nil) {
+                rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
+            }
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
-                                                                object:[recherchesSauvees objectAtIndex:2]];
+                                                                object:recherchesSauvee];
             break;
         default:
 			break;
@@ -589,6 +612,7 @@
             labelSurface1.text = @"";
             labelPrix1.text = @"";
             boutonRangee1.userInteractionEnabled = NO;
+            modifierRangee1.userInteractionEnabled = NO;
             break;
         case 2:
             labelType2.text = @"Aucun critères";
@@ -596,6 +620,7 @@
             labelSurface2.text = @"";
             labelPrix2.text = @"";
             boutonRangee2.userInteractionEnabled = NO;
+            modifierRangee2.userInteractionEnabled = NO;
             break;
         case 3:
             labelType3.text = @"Aucun critères";
@@ -603,6 +628,7 @@
             labelSurface3.text = @"";
             labelPrix3.text = @"";
             boutonRangee3.userInteractionEnabled = NO;
+            modifierRangee3.userInteractionEnabled = NO;
             break;
         default:
             break;
@@ -678,17 +704,23 @@
                 }
             }
             
-            if (recherche != nil) {
+            if (recherche != nil && recherche != @"") {
                 
                 switch (i) {
                     case 0:
                         boutonRangee1.userInteractionEnabled = YES;
+                        modifierRangee1.userInteractionEnabled = YES;
+                        supprimerRangee1.userInteractionEnabled = YES;
                         break;
                     case 1:
                         boutonRangee2.userInteractionEnabled = YES;
+                        modifierRangee2.userInteractionEnabled = YES;
+                        supprimerRangee2.userInteractionEnabled = YES;
                         break;
                     case 2:
                         boutonRangee3.userInteractionEnabled = YES;
+                        modifierRangee3.userInteractionEnabled = YES;
+                        supprimerRangee3.userInteractionEnabled = YES;
                         break;
                     default:
                         break;

@@ -45,7 +45,7 @@
 @property (nonatomic, assign) NSMutableDictionary *criteres2;
 
 -(UIImage *) getImage:(NSString *)cheminImage;
-- (BOOL) sendRequest;
+- (void) makeRequest;
 - (void) sauvegardeRecherches;
 
 @end

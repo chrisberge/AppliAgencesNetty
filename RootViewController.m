@@ -722,7 +722,6 @@
             
             AfficheListeAnnoncesController2 *afficheListeAnnoncesController = 
             [[AfficheListeAnnoncesController2 alloc] init];
-            //afficheListeAnnoncesController.title = @"Annonces";
             [self.navigationController pushViewController:afficheListeAnnoncesController animated:YES];
             [afficheListeAnnoncesController release];
             

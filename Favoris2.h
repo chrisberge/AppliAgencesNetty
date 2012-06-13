@@ -14,9 +14,9 @@
 #import "AfficheAnnonceController4.h"
 #import "ProgressViewContoller.h"
 #import "AppliAgencesNettyAppDelegate.h"
-#import "RootViewController.h"
+#import "RootViewControllerModifierFavoris.h"
 
-@class RootViewController;
+@class RootViewControllerModifierFavoris;
 @class ASINetworkQueue;
 @class XMLParser;
 @class AppliAgencesNettyAppDelegate;
@@ -54,7 +54,7 @@
     UILabel *labelPrix3;
     UILabel *labelSurface3;
     
-    RootViewController *rechercheMulti;
+    RootViewControllerModifierFavoris *rechercheMulti;
     NSString *whichView;
     NSMutableArray *tableauAnnonces1;
     
@@ -66,12 +66,15 @@
     
     Annonce *annonceSelected;
     int indexASupprimer;
+    
+    AppliAgencesNettyAppDelegate *appDelegate;
 }
 
 @property (nonatomic, assign) NSString *whichView;
-@property (nonatomic, retain) RootViewController *rechercheMulti;
+@property (nonatomic, retain) RootViewControllerModifierFavoris *rechercheMulti;
 @property (nonatomic, copy) NSMutableArray *tableauAnnonces1;
-//@property (nonatomic, copy) Annonce *annonceSelected;
+@property (nonatomic, copy) Annonce *annonceSelected;
+@property (nonatomic, assign) NSMutableDictionary *criteres2;
 
 - (void)getBiens;
 

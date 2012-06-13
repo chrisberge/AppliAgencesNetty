@@ -1,22 +1,19 @@
 //
-//  AfficheListeAnnoncesController2.h
+//  AfficheListeAnnoncesControllerModifierFavoris.h
 //  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 12/07/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Christophe Bergé on 13/06/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-//  UTILISEE DEPUIS RECHERCHE MULTICRITERES
+//  UTILISEE DEPUIS MODIFIER FAVORIS
 
 #import <UIKit/UIKit.h>
 #import "Annonce.h"
-#import "AfficheAnnonceController2.h"
+#import "AfficheAnnonceControllerModifierFavoris.h"
 #import "ProgressViewContoller.h"
-#import "AppliAgencesNettyAppDelegate.h"
-
-@class AppliAgencesNettyAppDelegate;
 
 
-@interface AfficheListeAnnoncesController2 : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface AfficheListeAnnoncesControllerModifierFavoris : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     NSMutableArray *listeAnnonces;
     NSMutableDictionary *criteres;
 	Annonce *annonceSelected;

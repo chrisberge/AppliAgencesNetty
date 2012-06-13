@@ -51,13 +51,13 @@
 {
     [super viewDidLoad];
     //self.navigationController.navigationBar.hidden = YES;
-    criteres = [[NSMutableDictionary alloc] init];
-    listeAnnonces = [[NSMutableArray alloc] init];
+    //criteres = [[NSMutableDictionary alloc] init];
+    //listeAnnonces = [[NSMutableArray alloc] init];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheListeAnnoncesRoot:) name:@"afficheListeAnnoncesRoot" object: nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"afficheListeAnnoncesReadyRoot" object: @"afficheListeAnnoncesReadyRoot"];
-	
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonceReady:) name:@"afficheAnnonceReady" object: nil];
+    appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    listeAnnonces = appDelegate.accueilView.myTableViewController.tableauAnnonces1;
+    criteres = appDelegate.accueilView.myTableViewController.criteres2;
     
     /*UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     self.view.backgroundColor = fond;
@@ -442,22 +442,6 @@
     [self.view addSubview:tableView1];
 }
 
-- (void) afficheListeAnnoncesRoot:(NSNotification *)notify {
-	[listeAnnonces removeAllObjects];
-    [listeAnnonces release];
-    listeAnnonces = nil;
-    listeAnnonces = [[NSMutableArray alloc] initWithArray:[[notify object] objectAtIndex:1]];
-    
-    [criteres removeAllObjects];
-    [criteres release];
-    criteres = nil;
-    criteres = [[NSMutableDictionary alloc] initWithDictionary:[[notify object] objectAtIndex:0]];
-}
-
-- (void) afficheAnnonceReady:(NSNotification *)notify {
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"afficheAnnonce" object: annonceSelected];
-}
-
 - (void) buttonPushed:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -736,15 +720,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	
-    //[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 	annonceSelected = [listeAnnonces objectAtIndex:indexPath.row];
     
+    appDelegate.annonceMulti = annonceSelected;
+    
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
 
-    
-	AfficheAnnonceController2 *afficheAnnonceController = [[AfficheAnnonceController2 alloc] init/*WithNibName:@"AfficheAnnonceController" bundle:nil*/];
+	AfficheAnnonceController2 *afficheAnnonceController = [[AfficheAnnonceController2 alloc] init];
 	[self.navigationController pushViewController:afficheAnnonceController animated:YES];
 	[afficheAnnonceController release];
 	

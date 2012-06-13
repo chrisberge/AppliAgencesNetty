@@ -90,7 +90,7 @@
     tableauAnnonces1 = [[NSMutableArray alloc] init];
     tableauVilles = [[NSMutableArray alloc] init];
     
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"accueil";
     
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
@@ -149,7 +149,7 @@
 - (void) buttonPushed:(id)sender
 {
 	UIButton *button = sender;
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
 	switch (button.tag) {
 		case 1:
             appDelegate.whichView = @"multicriteres";
@@ -174,9 +174,11 @@
     
     annonceSelected = [tableauAnnonces1 objectAtIndex:[num intValue]];
     
+    appDelegate.annonceAccueil = annonceSelected;
+    
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
     
-	AfficheAnnonceController2 *afficheAnnonceController = [[AfficheAnnonceController2 alloc] init];
+	AfficheAnnonceControllerAccueil *afficheAnnonceController = [[AfficheAnnonceControllerAccueil alloc] init];
 	[self.navigationController pushViewController:afficheAnnonceController animated:YES];
 	[afficheAnnonceController release];
     afficheAnnonceController = nil;
@@ -195,15 +197,12 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
-    //[self makeRequest];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"whichViewFrom" object: @"Accueil"];
     [myOpenFlowView centerOnSelectedCover:NO];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [pvc.view removeFromSuperview];
-    //[myOpenFlowView release];
 }
 
 - (void)didReceiveMemoryWarning {

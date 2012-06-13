@@ -19,6 +19,7 @@
 	BOOL searching;
 	BOOL letUserSelectRow;
     UILabel *messageBas;
+    NSString *postString;
     
 }
 

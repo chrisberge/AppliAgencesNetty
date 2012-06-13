@@ -13,14 +13,15 @@
 #import "ContactViewController.h"
 #import "Favoris2.h"
 #import "AgenceViewController.h"
+#import "Annonce.h"
 
 @class Accueil;
 @class AgenceViewController;
 @class Favoris2;
 
-@interface AppliAgencesNettyAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppliAgencesNettyAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *window;
-	UITabBarController *tabBarController;
+	UITabBarController *myTabBarController;
 	Accueil *accueilView;
 	Favoris2 *favorisView;
 	AgenceViewController *agenceView;
@@ -28,6 +29,11 @@
     BOOL isAccueil;
     UIImageView *imagePresentation;
     NSString *whichView;
+    Annonce *annonceAccueil;
+    Annonce *annonceMulti;
+    Annonce *annonceFavoris;
+    Annonce *annonceBiensFavoris;
+    Annonce *annonceModifierFavoris;
 	
 @private
     NSManagedObjectContext *managedObjectContext_;
@@ -37,13 +43,18 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) UITabBarController *tabBarController;
+@property (nonatomic, retain) UITabBarController *myTabBarController;
 @property (nonatomic, retain) Accueil *accueilView;
 @property (nonatomic, retain) Favoris2 *favorisView;
 @property (nonatomic, retain) AgenceViewController *agenceView;
 @property (nonatomic, retain) ContactViewController *contactView;
 @property (nonatomic, assign) BOOL isAccueil;
 @property (nonatomic, assign) NSString *whichView;
+@property (nonatomic, retain) Annonce *annonceAccueil;
+@property (nonatomic, retain) Annonce *annonceMulti;
+@property (nonatomic, retain) Annonce *annonceFavoris;
+@property (nonatomic, retain) Annonce *annonceBiensFavoris;
+@property (nonatomic, retain) Annonce *annonceModifierFavoris;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

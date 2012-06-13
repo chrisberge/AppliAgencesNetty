@@ -1,15 +1,14 @@
 //
-//  AfficheAnnonceController2.m
+//  AfficheAnnonceControllerModifierFavoris.m
 //  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 13/07/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Christophe Bergé on 13/06/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "AfficheAnnonceController2.h"
+#import "AfficheAnnonceControllerModifierFavoris.h"
 
-
-@implementation AfficheAnnonceController2
+@implementation AfficheAnnonceControllerModifierFavoris
 
 - (void)diapoControllerDidFinish:(DiapoController3 *)controller
 {
@@ -46,11 +45,11 @@
 #pragma mark - View lifecycle
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView
+ {
+ }
+ */
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -64,13 +63,13 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheDiaporamaReady:) name:@"afficheDiaporamaReady" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(coverFlowFicheDetaillee:) name:@"coverFlowFicheDetaillee" object: nil];
     
-	lAnnonce = appDelegate.annonceMulti;
+	lAnnonce = appDelegate.annonceModifierFavoris;
     
     UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     self.view.backgroundColor = fond;
     [fond release];
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
     //SCROLLVIEW
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 70, 320, 340)];
     [scrollView setContentSize:CGSizeMake(320, 1120)];
@@ -106,9 +105,9 @@
     
     /*--- BANDEAU VIERGE ---*/
     /*UIImageView *vierge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-vierge.png"]];
-    [vierge setFrame:CGRectMake(0,50,320,20)];
-    [self.view addSubview:vierge];
-    [vierge release];*/
+     [vierge setFrame:CGRectMake(0,50,320,20)];
+     [self.view addSubview:vierge];
+     [vierge release];*/
     /*--- BANDEAU VIERGE ---*/
     
     /*--- CRITERES ---*/
@@ -360,7 +359,7 @@
         
         nextY = 670;
         isCe = YES;
-    
+        
         NSString *consoA = @"consommationenergieA";
         NSString *consoB = @"consommationenergieB";
         NSString *consoC = @"consommationenergieC";
@@ -480,7 +479,7 @@
     if ([lettreGES length] > 0) {
         
         isGes = YES;
-    
+        
         NSString *gesA = @"emissiongesA";
         NSString *gesB = @"emissiongesB";
         NSString *gesC = @"emissiongesC";
@@ -749,10 +748,10 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:texte]];
     }
     else{
-    
+        
         texte = [texte stringByReplacingOccurrencesOfString:@"." withString:@""];
         texte = [texte substringFromIndex:1];
-    
+        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
                                                     [NSString stringWithFormat:@"tel://+33%@",texte]]];
     }

@@ -1,15 +1,14 @@
 //
-//  RootViewController.m
+//  RootViewControllerModifierFavoris.m
 //  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 16/06/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Christophe Bergé on 13/06/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "RootViewControllerModifierFavoris.h"
 
-
-@implementation RootViewController
+@implementation RootViewControllerModifierFavoris
 
 @synthesize tableauAnnonces1, criteres1, criteres2;
 
@@ -18,25 +17,25 @@
     nbRequetes = 0;
     
 	criteres1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-				@"", @"transaction",
-                @"", @"villes",
-				@"", @"ville1",
-				@"", @"ville2",
-				@"", @"ville3",
-                @"", @"ville4",
-				@"", @"cp1",
-				@"", @"cp2",
-				@"", @"cp3",
-                @"", @"cp4",
-				@"", @"types",
-                @"", @"nbPieces",
-				@"", @"nb_pieces_mini",
-				@"", @"nb_pieces_maxi",
-				@"", @"prix_mini",
-				@"", @"prix_maxi",
-				@"", @"surface_mini",
-				@"", @"surface_maxi",
-				nil];
+                 @"", @"transaction",
+                 @"", @"villes",
+                 @"", @"ville1",
+                 @"", @"ville2",
+                 @"", @"ville3",
+                 @"", @"ville4",
+                 @"", @"cp1",
+                 @"", @"cp2",
+                 @"", @"cp3",
+                 @"", @"cp4",
+                 @"", @"types",
+                 @"", @"nbPieces",
+                 @"", @"nb_pieces_mini",
+                 @"", @"nb_pieces_maxi",
+                 @"", @"prix_mini",
+                 @"", @"prix_maxi",
+                 @"", @"surface_mini",
+                 @"", @"surface_maxi",
+                 nil];
     
     criteres2 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
                  @"", @"transaction",
@@ -72,12 +71,13 @@
     
 	tableauAnnonces1 = [[NSMutableArray alloc] init];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(citySelectedMulti:) name:@"citySelectedMulti" object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(typesSelectedMulti:) name:@"typesSelectedMulti" object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(surfaceSelectedMulti:) name:@"surfaceSelectedMulti" object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(nbPiecesSelectedMulti:) name:@"nbPiecesSelectedMulti" object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(budgetSelectedMulti:) name:@"budgetSelectedMulti" object: nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(getCriteresMulti:) name:@"getCriteresMulti" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(citySelectedFavoris:) name:@"citySelectedFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(typesSelectedFavoris:) name:@"typesSelectedFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(surfaceSelectedFavoris:) name:@"surfaceSelectedFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(nbPiecesSelectedFavoris:) name:@"nbPiecesSelectedFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(budgetSelectedFavoris:) name:@"budgetSelectedFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(getCriteresFavoris:) name:@"getCriteresFavoris" object: nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(rechercheSauveeFavoris:) name:@"rechercheSauveeFavoris" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(indexPathsSelected:) name:@"indexPathsSelected" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(getIndexPaths:) name:@"getIndexPaths" object: nil];
     
@@ -104,7 +104,7 @@
     [enTete release];
     
     //BANDEAU RECHERCHE
-    UIImageView *sousEnTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-recherche-multicritere.png"]];
+    UIImageView *sousEnTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-recherche-Favoriscritere.png"]];
     [sousEnTete setFrame:CGRectMake(0,50,320,20)];
     [self.view addSubview:sousEnTete];
     
@@ -150,7 +150,7 @@
     
     [boutonLocation setFrame:CGRectMake(xPos + 147,yPos - 35,110,30)];
     [boutonLocation addTarget:self action:@selector(buttonPushed:) 
-          forControlEvents:UIControlEventTouchUpInside];
+             forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"location"];
 	[boutonLocation setImage:image forState:UIControlStateNormal];
@@ -171,7 +171,7 @@
     
     [boutonVille setFrame:CGRectMake(xPos,yPos,xSize,ySize)];
     [boutonVille addTarget:self action:@selector(buttonPushed:) 
-              forControlEvents:UIControlEventTouchUpInside];
+          forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"ville-departement-etc"];
 	[boutonVille setImage:image forState:UIControlStateNormal];
@@ -192,7 +192,7 @@
     
     [boutonTypeBien setFrame:CGRectMake(xPos,yPos + yDecalage,xSize,ySize)];
     [boutonTypeBien addTarget:self action:@selector(buttonPushed:) 
-          forControlEvents:UIControlEventTouchUpInside];
+             forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"type-de-biens"];
 	[boutonTypeBien setImage:image forState:UIControlStateNormal];
@@ -212,7 +212,7 @@
     
     [boutonSurface setFrame:CGRectMake(xPos,yPos + (yDecalage * 2),xSize,ySize)];
     [boutonSurface addTarget:self action:@selector(buttonPushed:) 
-             forControlEvents:UIControlEventTouchUpInside];
+            forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"surface"];
 	[boutonSurface setImage:image forState:UIControlStateNormal];
@@ -252,7 +252,7 @@
     
     [boutonBudget setFrame:CGRectMake(xPos,yPos + (yDecalage * 4),xSize,ySize)];
     [boutonBudget addTarget:self action:@selector(buttonPushed:) 
-            forControlEvents:UIControlEventTouchUpInside];
+           forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"budget"];
 	[boutonBudget setImage:image forState:UIControlStateNormal];
@@ -272,7 +272,7 @@
     
     [boutonRecherche setFrame:CGRectMake(xPos,yPos + (yDecalage * 5),xSize,ySize)];
     [boutonRecherche addTarget:self action:@selector(buttonPushed:) 
-            forControlEvents:UIControlEventTouchUpInside];
+              forControlEvents:UIControlEventTouchUpInside];
     
     image = [self getImage:@"rechercher"];
 	[boutonRecherche setImage:image forState:UIControlStateNormal];
@@ -340,24 +340,24 @@
         case 5:
             NSLog(@"Lancer la recherche");
             /*if ([criteres1 valueForKey:@"ville1"] == @"") {
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Veuillez choisir au moins une ville."
-                                                                message:nil
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-                [alert release];
-                
-            }
-            else {*/
-                
-                //ENVOYER LA REQUETE ET AFFICHER LES RESULTATS
-                isConnectionErrorPrinted = NO;
-                [tableauAnnonces1 removeAllObjects];
-                nbRequetes = 0;
-                [self makeRequest];
-                
+             
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Veuillez choisir au moins une ville."
+             message:nil
+             delegate:self
+             cancelButtonTitle:@"OK"
+             otherButtonTitles:nil];
+             [alert show];
+             [alert release];
+             
+             }
+             else {*/
+            
+            //ENVOYER LA REQUETE ET AFFICHER LES RESULTATS
+            isConnectionErrorPrinted = NO;
+            [tableauAnnonces1 removeAllObjects];
+            nbRequetes = 0;
+            [self makeRequest];
+            
             //}
             break;
         case 6:
@@ -413,22 +413,22 @@
             //NSLog(@"ici criteres2: %@",criteres2);
         }
     }
-
+    
     NSLog(@"bodyString:%@\n",bodyString);
-
+    
     ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"recherche multicriteres"] forKey:@"name"]];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"recherche Favoriscriteres"] forKey:@"name"]];
     [networkQueue addOperation:request];
-
+    
     [networkQueue go];
 }
 
-- (void) getCriteresMulti:(NSNotification *)notify {
+- (void) getCriteresFavoris:(NSNotification *)notify {
     NSLog(@"criteres1 getCrit: %@",criteres1);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setCriteres" object: criteres1];
 }
 
-- (void) citySelectedMulti:(NSNotification *)notify {
+- (void) citySelectedFavoris:(NSNotification *)notify {
 	NSMutableArray *array = [notify object];
     
     if ([array count] != 0) {
@@ -440,9 +440,25 @@
             [criteres1 setValue:[dict valueForKey:@"commune"] forKey:ville];
             i++;
         }
-    
+        
     }
 	NSLog(@"criteres1: %@",criteres1);
+}
+
+- (void) rechercheSauveeFavoris:(NSNotification *)notify {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[notify object]];
+    
+    NSEnumerator *enume;
+    NSString *key;
+    
+    enume = [dict keyEnumerator];
+    
+    while((key = [enume nextObject])) {
+        [criteres1 setValue:[dict valueForKey:key] forKey:key];
+    }
+    
+    NSLog(@"criteres1 rechSauv: %@",criteres1);
+    [self afficheCriteres];
 }
 
 - (void) indexPathsSelected:(NSNotification *)notify {
@@ -453,7 +469,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"setIndexes" object: indexPathsVilles];
 }
 
-- (void) typesSelectedMulti:(NSNotification *)notify {
+- (void) typesSelectedFavoris:(NSNotification *)notify {
 	NSMutableArray *typesSelected = [notify object];
     
 	NSString *types = @"";
@@ -475,7 +491,7 @@
     NSLog(@"criteres1: %@",criteres1);
 }
 
-- (void) nbPiecesSelectedMulti:(NSNotification *)notify {
+- (void) nbPiecesSelectedFavoris:(NSNotification *)notify {
     NSMutableArray *nbPiecesSelected = [notify object];
     NSLog(@"nbpieces: %@", nbPiecesSelected);
     
@@ -514,7 +530,7 @@
     
 }
 
-- (void) surfaceSelectedMulti:(NSNotification *)notify {
+- (void) surfaceSelectedFavoris:(NSNotification *)notify {
 	Intervalle *intervalle = [notify object];
 	int min = [intervalle min];
 	int max = [intervalle max];
@@ -542,7 +558,7 @@
     NSLog(@"criteres1: %@",criteres1);
 }
 
-- (void) budgetSelectedMulti:(NSNotification *)notify {
+- (void) budgetSelectedFavoris:(NSNotification *)notify {
 	Intervalle *intervalle = [notify object];
 	int min = [intervalle min];
 	int max = [intervalle max];
@@ -610,17 +626,17 @@
             
             if (nbRequetes < 2 && ([criteres1 valueForKey:@"cp1"] != @"")) {
                 userInfo = [NSDictionary 
-                                          dictionaryWithObject:@"Votre recherche a été élargie à tout le département."
-                                          forKey:NSLocalizedDescriptionKey];
+                            dictionaryWithObject:@"Votre recherche a été élargie à tout le département."
+                            forKey:NSLocalizedDescriptionKey];
                 
                 error =[NSError errorWithDomain:@"Recherche élargie."
                                            code:1 userInfo:userInfo];
                 
                 alert = [[UIAlertView alloc] initWithTitle:@"Recherche élargie"
-                                                                message:[error localizedDescription]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
+                                                   message:[error localizedDescription]
+                                                  delegate:self
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil];
                 [alert show];
                 [alert release];
                 
@@ -633,17 +649,17 @@
             }
             else{
                 userInfo = [NSDictionary 
-                                          dictionaryWithObject:@"Aucun bien ne correspond à ces critères dans notre base de données."
-                                          forKey:NSLocalizedDescriptionKey];
+                            dictionaryWithObject:@"Aucun bien ne correspond à ces critères dans notre base de données."
+                            forKey:NSLocalizedDescriptionKey];
                 
                 error =[NSError errorWithDomain:@"Aucun bien trouvé."
                                            code:1 userInfo:userInfo];
                 
                 alert = [[UIAlertView alloc] initWithTitle:@"Aucun bien trouvé"
-                                                                message:[error localizedDescription]
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
+                                                   message:[error localizedDescription]
+                                                  delegate:self
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil];
                 [alert show];
                 [alert release];
                 [criteres1 setValue:@"" forKey:@"cp1"];
@@ -685,8 +701,8 @@
             NSString *transaction = [NSString stringWithFormat:@"%d", coche.tag - 100];
             [criteres1 setValue:transaction forKey:@"transaction"];
             
-            AfficheListeAnnoncesController2 *afficheListeAnnoncesController = 
-            [[AfficheListeAnnoncesController2 alloc] init];
+            AfficheListeAnnoncesControllerModifierFavoris *afficheListeAnnoncesController = 
+            [[AfficheListeAnnoncesControllerModifierFavoris alloc] init];
             [self.navigationController pushViewController:afficheListeAnnoncesController animated:YES];
             [afficheListeAnnoncesController release];
             
@@ -718,70 +734,14 @@
     }
 }
 
--(void) sauvegardeRecherches{
-	int i = 0;
-	NSMutableDictionary *recherche;
-	NSMutableArray *recherches = [[NSMutableArray alloc] init];
-	NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-	
-	for (i = 0; i < 3; i++) {
-		[recherches addObject:@""];
-		if ((recherche = [NSDictionary dictionaryWithContentsOfFile:
-						  [directory stringByAppendingPathComponent:
-						   [@"" stringByAppendingFormat:@"%d.plist",i+1]]]) != nil ) {
-                              [recherches replaceObjectAtIndex:i withObject:recherche];
-                          }
-	}
-	
-	for (i = 2; i > 0; i--) {
-		if ([recherches objectAtIndex:i-1] != @"") {
-			[recherches replaceObjectAtIndex:i withObject:[recherches objectAtIndex:i-1]];
-		}
-	}
-	
-	[recherches replaceObjectAtIndex:0 withObject:criteres2];
-	
-	for (i = 0; i < 3; i++) {
-		if ([recherches objectAtIndex:i] != @"") {
-			recherche = [recherches objectAtIndex:i];
-			[recherche writeToFile:[directory stringByAppendingPathComponent:
-									[@"" stringByAppendingFormat:@"%d.plist",i+1]] atomically:YES];
-		}
-	}
-	NSLog(@"recherches: %@",recherches);
-    [recherche release];
-    //[recherches release];
-}
-
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
-
-- (void)viewWillAppear:(BOOL)animated {
-    nbRequetes = 0;
-    //AFFICHAGE DES CRITERES CHOISIS
-    
+- (void)afficheCriteres{
     //VILLE
-    labelVille.text = @"";
-    for (int i = 1; i <= 4; i++) {
-        
-        NSString *ville = [NSString stringWithFormat:@"ville%d", i];
-        
-        if ([criteres1 valueForKey:ville] != @"" && [criteres1 valueForKey:ville] != nil) {
-            if (labelVille.text == @"") {
-                labelVille.text = [NSString stringWithFormat:@"%@", [criteres1 valueForKey:ville]];
-            }
-            else{
-                labelVille.text = [labelVille.text stringByAppendingFormat:@",%@", [criteres1 valueForKey:ville]];
-            }
-        }
+    if (([criteres1 valueForKey:@"ville1"] != @"") && ([criteres1 valueForKey:@"ville1"] != nil)) {
+        labelVille.text = [criteres1 valueForKey:@"ville1"];
     }
     
     //TYPES DE BIEN
+    
     NSString *types = [criteres1 valueForKey:@"types"];
     
     NSMutableArray *arrayTypes = [[NSMutableArray alloc] initWithArray:[types componentsSeparatedByString:@","]];
@@ -803,8 +763,8 @@
     //SURFACE
     if ([criteres1 valueForKey:@"surface_mini"] != @"" && [criteres1 valueForKey:@"surface_maxi"] != @"") {
         labelSurface.text = [NSString stringWithFormat:@"De %d m² à %d m²",
-                         [[criteres1 valueForKey:@"surface_mini"] intValue],
-                         [[criteres1 valueForKey:@"surface_maxi"] intValue]];
+                             [[criteres1 valueForKey:@"surface_mini"] intValue],
+                             [[criteres1 valueForKey:@"surface_maxi"] intValue]];
     }
     
     if ([criteres1 valueForKey:@"surface_mini"] != @"" && [criteres1 valueForKey:@"surface_maxi"] == @"") {
@@ -879,13 +839,64 @@
         [formatter release];
         
         labelBudget.text = [NSString stringWithFormat:@"De %@ à %@",
-                             prix_mini,
-                             prix_maxi];
+                            prix_mini,
+                            prix_maxi];
     }
     
     if ([criteres1 valueForKey:@"prix_mini"] == @"" && [criteres1 valueForKey:@"prix_maxi"] == @"") {
         labelBudget.text = @"";
     }
+}
+
+-(void) sauvegardeRecherches{
+	int i = 0;
+	NSMutableDictionary *recherche;
+	NSMutableArray *recherches = [[NSMutableArray alloc] init];
+	NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+	
+	for (i = 0; i < 3; i++) {
+		[recherches addObject:@""];
+		if ((recherche = [NSDictionary dictionaryWithContentsOfFile:
+						  [directory stringByAppendingPathComponent:
+						   [@"" stringByAppendingFormat:@"%d.plist",i+1]]]) != nil ) {
+                              [recherches replaceObjectAtIndex:i withObject:recherche];
+                          }
+	}
+	
+	for (i = 2; i > 0; i--) {
+		if ([recherches objectAtIndex:i-1] != @"") {
+			[recherches replaceObjectAtIndex:i withObject:[recherches objectAtIndex:i-1]];
+		}
+	}
+	
+	[recherches replaceObjectAtIndex:0 withObject:criteres2];
+	
+	for (i = 0; i < 3; i++) {
+		if ([recherches objectAtIndex:i] != @"") {
+			recherche = [recherches objectAtIndex:i];
+			[recherche writeToFile:[directory stringByAppendingPathComponent:
+									[@"" stringByAppendingFormat:@"%d.plist",i+1]] atomically:YES];
+		}
+	}
+	NSLog(@"recherches: %@",recherches);
+    [recherche release];
+    //[recherches release];
+}
+
+/*
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
+
+- (void)viewWillAppear:(BOOL)animated {
+    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.whichView = @"favoris_modifier";
+    nbRequetes = 0;
+    //AFFICHAGE DES CRITERES CHOISIS
+    [self afficheCriteres];
     
     [super viewWillAppear:animated];
 }
@@ -921,6 +932,4 @@
     [super dealloc];
 }
 
-
 @end
-

@@ -11,9 +11,10 @@
 
 @implementation AppliAgencesNettyAppDelegate
 
-@synthesize window, /*myTableViewController,*/ tabBarController, accueilView;
+@synthesize window, /*myTableViewController,*/ myTabBarController, accueilView;
 @synthesize favorisView, agenceView, contactView;
 @synthesize isAccueil, whichView;
+@synthesize annonceAccueil, annonceMulti, annonceFavoris, annonceBiensFavoris, annonceModifierFavoris;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -40,11 +41,12 @@
     isAccueil = NO;
     
 	// creates your tab bar so you can add everything else to it
-	tabBarController = [[UITabBarController alloc] init];
+	myTabBarController = [[UITabBarController alloc] init];
 
     /******/
 	/*** VUE ONGLET ACCUEIL AVEC NAVIGATION ***/
 	accueilView = [[Accueil  alloc] init];
+    accueilView.title = @"Accueil";
     
     UINavigationController *tableNavController = [[[UINavigationController alloc] initWithRootViewController:accueilView] autorelease];
 	
@@ -56,6 +58,7 @@
 
 	/*** VUE ONGLET FAVORIS***/
 	favorisView = [[Favoris2 alloc] init];
+    favorisView.title = @"Favoris";
     
     UINavigationController *tableNavControllerFavoris = [[[UINavigationController alloc] initWithRootViewController:favorisView] autorelease];
 	
@@ -90,7 +93,7 @@
 	[utility release];
 	
 	//add both of your navigation controllers to the tab bar. You can put as many controllers on as you like, but they will turn into the more button.
-	tabBarController.viewControllers = [NSArray arrayWithObjects: tableNavController,
+	myTabBarController.viewControllers = [NSArray arrayWithObjects: tableNavController,
                                         /*favorisView,*/
                                         tableNavControllerFavoris,
                                         agenceView,
@@ -99,10 +102,12 @@
 	/*** FIN AJOUT DES ONGLETS DANS LA BARRE D'ONGLETS***/
 	/******/
     
-	[window addSubview:tabBarController.view];
+    myTabBarController.delegate = self;
+    
+	[window addSubview:myTabBarController.view];
     
     imagePresentation = [[[UIImageView alloc] autorelease] initWithImage:[UIImage imageNamed:@"Default.png"]];
-    [tabBarController.view addSubview:imagePresentation];
+    [myTabBarController.view addSubview:imagePresentation];
     [UIView beginAnimations:@"ImagePresentation" context:nil];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDelegate:self];
@@ -305,7 +310,7 @@
 
 
 - (void)dealloc {
-	[tabBarController release];
+	[myTabBarController release];
 	[accueilView release];
 	[favorisView release];
 	[agenceView release];

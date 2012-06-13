@@ -46,7 +46,19 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(setCriteres:) name:@"setCriteres" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(setIndexes:) name:@"setIndexes" object: nil];
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"getCriteres" object: nil];
+    
+    UIViewController *tempView = [self.navigationController.viewControllers objectAtIndex:0];
+    
+    if (tempView.title == @"Accueil") {
+        postString = @"Multi";
+    }
+    
+    if (tempView.title == @"Favoris") {
+        postString = @"Favoris";
+    }
+    
+    NSString *name = [NSString stringWithFormat:@"getCriteres%@",postString];
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object: nil];
     
     //HEADER
     UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
@@ -536,8 +548,11 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"citySelected" object: villes];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"indexPathsSelected" object: selectedRows];
+    NSString *name = [NSString stringWithFormat:@"citySelected%@",postString];
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object: villes];
+    
+    name = [NSString stringWithFormat:@"indexPathsSelected%@",postString];
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object: selectedRows];
 }
 
 @end

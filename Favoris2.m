@@ -10,7 +10,7 @@
 
 @implementation Favoris2
 
-@synthesize whichView, rechercheMulti, tableauAnnonces1/*, annonceSelected*/;
+@synthesize whichView, rechercheMulti, tableauAnnonces1, annonceSelected, criteres2;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -29,11 +29,12 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     tableauAnnonces1 = [[NSMutableArray alloc] init];
     criteres2 = [[NSMutableDictionary alloc] init];
-    rechercheMulti = [[RootViewController alloc] init];
+    rechercheMulti = [[RootViewControllerModifierFavoris alloc] init];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheListeAnnoncesReadyFavoris:) name:@"afficheListeAnnoncesReadyFavoris" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonceFavorisReady:) name:@"afficheAnnonceFavorisReady" object: nil];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 70, 320, 480)];
@@ -348,18 +349,6 @@
     }
 }
 
-- (void) afficheListeAnnoncesReadyFavoris:(NSNotification *)notify {
-    
-    
-    NSLog(@"criteres2: %@", criteres2);
-    NSLog(@"tableau Annonces FAV: %@", tableauAnnonces1);
-    
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:criteres2 copyItems:NO];
-    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:tableauAnnonces1 copyItems:NO];
-    NSArray *criteresEtAnnonces = [NSArray arrayWithObjects:dict, array, nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"afficheListeAnnoncesFavoris" object: criteresEtAnnonces];
-}
-
 - (void) buttonInfosPushed:(id)sender
 {
 	UIButton *button = sender;
@@ -395,9 +384,7 @@
 }
 
 - (void)makeRequest:(int)num{
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"favoris";
-    //whichView = @"favoris";
     NSMutableDictionary *criteres1 = [recherchesSauvees objectAtIndex:num];
     
     NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&";
@@ -526,8 +513,6 @@
 - (void) buttonModifierPushed:(id)sender
 {
 	UIButton *button = sender;
-    //RootViewController *rechercheMultiCriteres;
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSMutableDictionary *rechercheSauvee;
     
@@ -543,7 +528,7 @@
                 rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauveeFavoris"
                                                                 object:rechercheSauvee];
 			break;
 		case 12:
@@ -557,7 +542,7 @@
                 rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauveeFavoris"
                                                                 object:rechercheSauvee];
             break;
         case 13:
@@ -571,7 +556,7 @@
                 rechercheSauvee = [NSMutableDictionary dictionaryWithObject:@"0" forKey:@"transaction"];
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauvee"
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"rechercheSauveeFavoris"
                                                                 object:rechercheSauvee];
             break;
         default:
@@ -1147,6 +1132,8 @@
     [annonceSelected setValue:[bien1 valueForKey:@"ascenseur"] forKey:@"ascenseur"];
     [annonceSelected setValue:[bien1 valueForKey:@"chauffage"] forKey:@"chauffage"];
     [annonceSelected setValue:[bien1 valueForKey:@"date"] forKey:@"date"];
+    
+    appDelegate.annonceBiensFavoris = annonceSelected;
     
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
     

@@ -19,6 +19,11 @@
 		8304014B15139A4E00D4DEDE /* telephone-agence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014A15139A4E00D4DEDE /* telephone-agence.txt */; };
 		8304014D15139B0200D4DEDE /* coordonnees-globales.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014C15139B0200D4DEDE /* coordonnees-globales.txt */; };
 		83197C9E13DE15E700FC194F /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83197C9D13DE15E700FC194F /* icone.png */; };
+		832314B21588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */; };
+		832314B51588C050009BD16D /* AfficheAnnonceControllerFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B41588C050009BD16D /* AfficheAnnonceControllerFavoris.m */; };
+		832314B81588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B71588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m */; };
+		832314BB1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314BA1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m */; };
+		832314BE1588D564009BD16D /* RootViewControllerModifierFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314BD1588D564009BD16D /* RootViewControllerModifierFavoris.m */; };
 		832D167F1484F5D600831B30 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 832D167E1484F5D600831B30 /* libz.1.2.5.dylib */; };
 		8368060F13D5FE4E0047E32B /* DiapoController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 8368060E13D5FE4E0047E32B /* DiapoController3.m */; };
 		8368061213D609620047E32B /* AgenceModalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8368061113D609620047E32B /* AgenceModalView.m */; };
@@ -141,8 +146,6 @@
 		83B24E5C1240EADC0064311A /* SelectionBudgetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B24E5A1240EADC0064311A /* SelectionBudgetPickerController.m */; };
 		83B24E5D1240EADC0064311A /* SelectionBudgetPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B24E5B1240EADC0064311A /* SelectionBudgetPickerController.xib */; };
 		83BA4C6011FB084F00EBCA67 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BA4C5F11FB084F00EBCA67 /* Utility.m */; };
-		83BA4CAE11FB0EFE00EBCA67 /* Favoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BA4CAC11FB0EFE00EBCA67 /* Favoris.m */; };
-		83BA4CAF11FB0EFE00EBCA67 /* Favoris.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83BA4CAD11FB0EFE00EBCA67 /* Favoris.xib */; };
 		83BDABC412A6A41D004E600B /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83BDABC312A6A41D004E600B /* XMLParser.m */; };
 		83C4CBCD13D0D578002CB110 /* m2-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C4CBC713D0D578002CB110 /* m2-down.png */; };
 		83C4CBCE13D0D578002CB110 /* m2-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C4CBC813D0D578002CB110 /* m2-middle.png */; };
@@ -202,6 +205,16 @@
 		8304014A15139A4E00D4DEDE /* telephone-agence.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "telephone-agence.txt"; sourceTree = "<group>"; };
 		8304014C15139B0200D4DEDE /* coordonnees-globales.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coordonnees-globales.txt"; sourceTree = "<group>"; };
 		83197C9D13DE15E700FC194F /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone.png; sourceTree = "<group>"; };
+		832314B01588BD7A009BD16D /* AfficheAnnonceControllerAccueil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceControllerAccueil.h; sourceTree = "<group>"; };
+		832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceControllerAccueil.m; sourceTree = "<group>"; };
+		832314B31588C050009BD16D /* AfficheAnnonceControllerFavoris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceControllerFavoris.h; sourceTree = "<group>"; };
+		832314B41588C050009BD16D /* AfficheAnnonceControllerFavoris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceControllerFavoris.m; sourceTree = "<group>"; };
+		832314B61588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceControllerModifierFavoris.h; sourceTree = "<group>"; };
+		832314B71588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceControllerModifierFavoris.m; sourceTree = "<group>"; };
+		832314B91588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheListeAnnoncesControllerModifierFavoris.h; sourceTree = "<group>"; };
+		832314BA1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheListeAnnoncesControllerModifierFavoris.m; sourceTree = "<group>"; };
+		832314BC1588D563009BD16D /* RootViewControllerModifierFavoris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewControllerModifierFavoris.h; sourceTree = "<group>"; };
+		832314BD1588D564009BD16D /* RootViewControllerModifierFavoris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewControllerModifierFavoris.m; sourceTree = "<group>"; };
 		832D167E1484F5D600831B30 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		8368060D13D5FE4E0047E32B /* DiapoController3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiapoController3.h; sourceTree = "<group>"; };
 		8368060E13D5FE4E0047E32B /* DiapoController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiapoController3.m; sourceTree = "<group>"; };
@@ -368,9 +381,6 @@
 		83B24E5B1240EADC0064311A /* SelectionBudgetPickerController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SelectionBudgetPickerController.xib; path = Classes/SelectionBudgetPickerController.xib; sourceTree = "<group>"; };
 		83BA4C5E11FB084F00EBCA67 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		83BA4C5F11FB084F00EBCA67 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
-		83BA4CAB11FB0EFE00EBCA67 /* Favoris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Favoris.h; path = Classes/Favoris.h; sourceTree = "<group>"; };
-		83BA4CAC11FB0EFE00EBCA67 /* Favoris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Favoris.m; path = Classes/Favoris.m; sourceTree = "<group>"; };
-		83BA4CAD11FB0EFE00EBCA67 /* Favoris.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Favoris.xib; path = Classes/Favoris.xib; sourceTree = "<group>"; };
 		83BDABC212A6A41D004E600B /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
 		83BDABC312A6A41D004E600B /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
 		83C4CBC713D0D578002CB110 /* m2-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "m2-down.png"; sourceTree = "<group>"; };
@@ -756,6 +766,8 @@
 			children = (
 				83751B1B13AA553500774276 /* RootViewController.h */,
 				83751B1C13AA553500774276 /* RootViewController.m */,
+				832314BC1588D563009BD16D /* RootViewControllerModifierFavoris.h */,
+				832314BD1588D564009BD16D /* RootViewControllerModifierFavoris.m */,
 				838150E813CF12F00070C3F0 /* Selection Type bien */,
 				838150E713CF11090070C3F0 /* Selection Ville */,
 				838150E913CF13480070C3F0 /* Selection Surface */,
@@ -827,6 +839,8 @@
 				837E5D5913CCADE700CA5776 /* AfficheListeAnnoncesController2.m */,
 				836C5A07152DC6E1008BDE0B /* AfficheListeAnnoncesController3.h */,
 				836C5A08152DC6E1008BDE0B /* AfficheListeAnnoncesController3.m */,
+				832314B91588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.h */,
+				832314BA1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m */,
 			);
 			name = "Resultats recherche";
 			sourceTree = "<group>";
@@ -840,6 +854,12 @@
 				837F2EB513EF400C0049FFEE /* AfficheAnnonceController3.m */,
 				837664A01508B63E0035B357 /* AfficheAnnonceController4.h */,
 				837664A11508B63E0035B357 /* AfficheAnnonceController4.m */,
+				832314B01588BD7A009BD16D /* AfficheAnnonceControllerAccueil.h */,
+				832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */,
+				832314B31588C050009BD16D /* AfficheAnnonceControllerFavoris.h */,
+				832314B41588C050009BD16D /* AfficheAnnonceControllerFavoris.m */,
+				832314B61588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.h */,
+				832314B71588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m */,
 			);
 			name = "Fiche Detaillee";
 			sourceTree = "<group>";
@@ -847,9 +867,6 @@
 		838150F113CF170C0070C3F0 /* Favoris */ = {
 			isa = PBXGroup;
 			children = (
-				83BA4CAB11FB0EFE00EBCA67 /* Favoris.h */,
-				83BA4CAC11FB0EFE00EBCA67 /* Favoris.m */,
-				83BA4CAD11FB0EFE00EBCA67 /* Favoris.xib */,
 				8387184A157E416A00B13231 /* Favoris2.h */,
 				8387184B157E416A00B13231 /* Favoris2.m */,
 			);
@@ -1076,7 +1093,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				83C7CCBA11FA024200C9F911 /* Accueil.xib in Resources */,
-				83BA4CAF11FB0EFE00EBCA67 /* Favoris.xib in Resources */,
 				83A81861120054AF00BDADA2 /* SelectionTypeBienController.xib in Resources */,
 				837FAFCD1237E05000BD4219 /* SelectionNbPiecesController.xib in Resources */,
 				83B24E5D1240EADC0064311A /* SelectionBudgetPickerController.xib in Resources */,
@@ -1204,7 +1220,6 @@
 				1D3623260D0F684500981E51 /* AppliAgencesNettyAppDelegate.m in Sources */,
 				83C7CCB911FA024200C9F911 /* Accueil.m in Sources */,
 				83BA4C6011FB084F00EBCA67 /* Utility.m in Sources */,
-				83BA4CAE11FB0EFE00EBCA67 /* Favoris.m in Sources */,
 				83A81860120054AF00BDADA2 /* SelectionTypeBienController.m in Sources */,
 				837FAFCC1237E05000BD4219 /* SelectionNbPiecesController.m in Sources */,
 				83B24E5C1240EADC0064311A /* SelectionBudgetPickerController.m in Sources */,
@@ -1250,6 +1265,11 @@
 				83C715B4152DDCFC00638B42 /* ChoixVilleController3.m in Sources */,
 				8387184C157E416B00B13231 /* Favoris2.m in Sources */,
 				83D2C02E158236B1008D79AD /* Coordonnees.m in Sources */,
+				832314B21588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m in Sources */,
+				832314B51588C050009BD16D /* AfficheAnnonceControllerFavoris.m in Sources */,
+				832314B81588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m in Sources */,
+				832314BB1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m in Sources */,
+				832314BE1588D564009BD16D /* RootViewControllerModifierFavoris.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

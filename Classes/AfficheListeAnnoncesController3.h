@@ -5,11 +5,11 @@
 //  Created by Christophe Bergé on 12/07/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
-//  CLASSE CREE POUR FAVORIS
+//  UTILISEE DEPUIS RECHERCHES RECENTES FAVORIS
 
 #import <UIKit/UIKit.h>
 #import "Annonce.h"
-#import "AfficheAnnonceController2.h"
+#import "AfficheAnnonceControllerFavoris.h"
 #import "ProgressViewContoller.h"
 
 
@@ -22,6 +22,7 @@
     UIButton *boutonSurface;
     UIButton *boutonDate;
     ProgressViewContoller *pvc;
+    AppliAgencesNettyAppDelegate *appDelegate;
 }
 
 @property (nonatomic, copy) NSMutableArray *listeAnnonces;

@@ -1,15 +1,14 @@
 //
-//  AfficheListeAnnoncesController3.m
+//  AfficheListeAnnoncesControllerModifierFavoris.m
 //  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 12/07/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Christophe Bergé on 13/06/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "AfficheListeAnnoncesController3.h"
+#import "AfficheListeAnnoncesControllerModifierFavoris.h"
 
-
-@implementation AfficheListeAnnoncesController3
+@implementation AfficheListeAnnoncesControllerModifierFavoris
 
 @synthesize listeAnnonces, criteres, annonceSelected;
 
@@ -39,11 +38,11 @@
 #pragma mark - View lifecycle
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView
+ {
+ }
+ */
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -57,14 +56,14 @@
     
     appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    listeAnnonces = appDelegate.favorisView.tableauAnnonces1;
-    criteres = appDelegate.favorisView.criteres2;
+    listeAnnonces = appDelegate.favorisView.rechercheMulti.tableauAnnonces1;
+    criteres = appDelegate.favorisView.rechercheMulti.criteres2;
 	
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonceReady:) name:@"afficheAnnonceReady" object: nil];
     
     /*UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    self.view.backgroundColor = fond;
-    [fond release];*/
+     self.view.backgroundColor = fond;
+     [fond release];*/
     self.view.backgroundColor = [UIColor whiteColor];
     
     //HEADER
@@ -95,9 +94,9 @@
     
     //BANDEAU VIERGE
     UIImageView *vierge; /*= [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bandeau-vierge.png"]];
-    [vierge setFrame:CGRectMake(0,72,320,20)];
-    [self.view addSubview:vierge];
-    [vierge release];*/
+                          [vierge setFrame:CGRectMake(0,72,320,20)];
+                          [self.view addSubview:vierge];
+                          [vierge release];*/
     
     //CRITERES
     if (([criteres valueForKey:@"prix_mini"] != NULL) || ([criteres valueForKey:@"prix_maxi"] != NULL)) {
@@ -306,62 +305,62 @@
     
     //CRITERES DANS LE BANDEAU
     /*UIScrollView *textScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 72, 320, 20)];
-    textScroll.contentSize = CGSizeMake(640, 20);
-    textScroll.userInteractionEnabled = YES;
-    textScroll.scrollsToTop = YES;
-    
-    UITextView *criteresTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1000, 20)];
-    criteresTextView.text = @"";
-
-    NSString *text = @"";
-    
-    if ([criteres valueForKey:@"transaction"] != @"") {
-        if ([criteres valueForKey:@"transaction"] == @"0") {
-            text = @"Ventes - ";
-        }
-        if ([criteres valueForKey:@"transaction"] == @"1") {
-            text = @"Locations - ";
-        }
-    }
-    
-    if ([criteres valueForKey:@"ville1"] != NULL) {
-        text = [text stringByAppendingString:[NSString stringWithFormat:@"%@",[criteres valueForKey:@"ville1"]]];
-    }
-    
-    NSString *cp1 = [criteres valueForKey:@"cp1"];
-    if (cp1 != NULL) {
-        int cp1Int = [cp1 intValue];
-        NSString *indice = @"eme";
-        if ((cp1Int > 75000) && (cp1Int < 75021)) {
-            if (cp1Int == 75001) {
-                indice = @"er";
-            }
-            text = [text stringByAppendingFormat:@" - %d%@ arrondissement",cp1Int - 75000, indice];
-        }
-        else{
-            text = [text stringByAppendingFormat:@" - %@",
-                    [NSString stringWithFormat:@"%@",cp1]];
-        }
-    }
-    
-    if ([criteres valueForKey:@"prix"] != NULL)
-        text = [self setTextMinMax:@"prix" unit:@"€" texte:text];
-    
-    if ([criteres valueForKey:@"surface"] != NULL)
-        text = [self setTextMinMax:@"surface" unit:@"m²" texte:text];
-    
-    if (([criteres valueForKey:@"nb_pieces_maxi"] != NULL) && ([criteres valueForKey:@"nb_pieces_mini"] != NULL))
-        text = [self setTextMinMax:@"nb_pieces" unit:@"piece" texte:text];
-    
-    criteresTextView.text = text;
-    
-    criteresTextView.backgroundColor = [UIColor clearColor];
-    
-    [textScroll addSubview:criteresTextView];
-    [self.view addSubview:textScroll];
-    
-    [criteresTextView release];
-    [textScroll release];*/
+     textScroll.contentSize = CGSizeMake(640, 20);
+     textScroll.userInteractionEnabled = YES;
+     textScroll.scrollsToTop = YES;
+     
+     UITextView *criteresTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 1000, 20)];
+     criteresTextView.text = @"";
+     
+     NSString *text = @"";
+     
+     if ([criteres valueForKey:@"transaction"] != @"") {
+     if ([criteres valueForKey:@"transaction"] == @"0") {
+     text = @"Ventes - ";
+     }
+     if ([criteres valueForKey:@"transaction"] == @"1") {
+     text = @"Locations - ";
+     }
+     }
+     
+     if ([criteres valueForKey:@"ville1"] != NULL) {
+     text = [text stringByAppendingString:[NSString stringWithFormat:@"%@",[criteres valueForKey:@"ville1"]]];
+     }
+     
+     NSString *cp1 = [criteres valueForKey:@"cp1"];
+     if (cp1 != NULL) {
+     int cp1Int = [cp1 intValue];
+     NSString *indice = @"eme";
+     if ((cp1Int > 75000) && (cp1Int < 75021)) {
+     if (cp1Int == 75001) {
+     indice = @"er";
+     }
+     text = [text stringByAppendingFormat:@" - %d%@ arrondissement",cp1Int - 75000, indice];
+     }
+     else{
+     text = [text stringByAppendingFormat:@" - %@",
+     [NSString stringWithFormat:@"%@",cp1]];
+     }
+     }
+     
+     if ([criteres valueForKey:@"prix"] != NULL)
+     text = [self setTextMinMax:@"prix" unit:@"€" texte:text];
+     
+     if ([criteres valueForKey:@"surface"] != NULL)
+     text = [self setTextMinMax:@"surface" unit:@"m²" texte:text];
+     
+     if (([criteres valueForKey:@"nb_pieces_maxi"] != NULL) && ([criteres valueForKey:@"nb_pieces_mini"] != NULL))
+     text = [self setTextMinMax:@"nb_pieces" unit:@"piece" texte:text];
+     
+     criteresTextView.text = text;
+     
+     criteresTextView.backgroundColor = [UIColor clearColor];
+     
+     [textScroll addSubview:criteresTextView];
+     [self.view addSubview:textScroll];
+     
+     [criteresTextView release];
+     [textScroll release];*/
     
     //BOUTON TRIS
     //PAR PRIX
@@ -370,7 +369,7 @@
 	[boutonPrix setFrame:CGRectMake(48, 115, 72, 30)];
 	[boutonPrix setUserInteractionEnabled:YES];
 	[boutonPrix addTarget:self action:@selector(buttonPrixPushed:) 
-               forControlEvents:UIControlEventTouchUpInside];
+         forControlEvents:UIControlEventTouchUpInside];
     
     image = [UIImage imageNamed:@"prix-middle.png"];
 	[boutonPrix setImage:image forState:UIControlStateNormal];
@@ -386,7 +385,7 @@
 	[boutonSurface setFrame:CGRectMake(122, 115, 72, 30)];
 	[boutonSurface setUserInteractionEnabled:YES];
 	[boutonSurface addTarget:self action:@selector(buttonSurfacePushed:) 
-         forControlEvents:UIControlEventTouchUpInside];
+            forControlEvents:UIControlEventTouchUpInside];
     
     image = [UIImage imageNamed:@"m2-middle.png"];
 	[boutonSurface setImage:image forState:UIControlStateNormal];
@@ -428,7 +427,7 @@
     else{
         nbAnnoncesText.text = [NSString stringWithFormat:@"1 bien trouvé"];
     }
-                               
+    
     nbAnnoncesText.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:nbAnnoncesText];
@@ -646,7 +645,7 @@
 	//IMAGE
     
 	/*NSString *string = [uneAnnonce valueForKey:@"photos"];
-	NSLog(@"string photos: %@",string);*/
+     NSLog(@"string photos: %@",string);*/
     
     UIImage *image= [UIImage imageNamed:@"appareil-photo-photographie-icone-6076-64.png"];
     [cell.imageView setImage:image];
@@ -728,12 +727,12 @@
     
 	annonceSelected = [listeAnnonces objectAtIndex:indexPath.row];
     
-    appDelegate.annonceFavoris = annonceSelected;
+    appDelegate.annonceModifierFavoris = annonceSelected;
     
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
-
     
-	AfficheAnnonceControllerFavoris *afficheAnnonceController = [[AfficheAnnonceControllerFavoris alloc] init];
+    
+	AfficheAnnonceControllerModifierFavoris *afficheAnnonceController = [[AfficheAnnonceControllerModifierFavoris alloc] init];
 	[self.navigationController pushViewController:afficheAnnonceController animated:YES];
 	[afficheAnnonceController release];
 	

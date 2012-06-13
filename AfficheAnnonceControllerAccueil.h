@@ -1,11 +1,11 @@
 //
-//  AfficheAnnonceController4.h
+//  AfficheAnnonceControllerAccueil.h
 //  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 08/03/12.
+//  Created by Christophe Bergé on 13/06/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-//  CLASSE CREEE POUR BIENS FAVORIS
+//  CLASSE UTILISEE POUR ACCUEIL
 
 #import <UIKit/UIKit.h>
 #import "ArrayWithIndex.h"
@@ -17,13 +17,14 @@
 
 @class AppliAgencesNettyAppDelegate;
 
-@interface AfficheAnnonceController4 : UIViewController <DiapoController3Delegate>{
+@interface AfficheAnnonceControllerAccueil : UIViewController <DiapoController3Delegate>{
     Annonce *lAnnonce;
 	NSMutableArray *imagesArray;
 	ArrayWithIndex *arrayWithIndex;
     AFOpenFlowViewDiapo *myOpenFlowView;
     UIScrollView *scrollView;
     ProgressViewContoller *pvc;
+    UIButton *boutonRetour;
     AppliAgencesNettyAppDelegate *appDelegate;
 }
 

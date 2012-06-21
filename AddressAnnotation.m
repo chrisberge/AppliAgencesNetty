@@ -14,11 +14,27 @@
 @synthesize coordinate;
 
 - (NSString *)subtitle{
-    return @"Sub Title";
+    NSError *error;
+    NSString *fullPath;
+    NSString *texte;
+    
+    error = nil;
+    
+    fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-postales" ofType:@"txt"];
+    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    return texte;
 }
 
 - (NSString *)title{
-    return @"Title";
+    NSError *error;
+    NSString *fullPath;
+    NSString *texte;
+    
+    error = nil;
+    
+    fullPath = [[NSBundle mainBundle] pathForResource:@"nom-appli" ofType:@"txt"];
+    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    return texte;
 }
 
 -(id)initWithCoordinate:(CLLocationCoordinate2D) c{

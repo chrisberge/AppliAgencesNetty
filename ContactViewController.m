@@ -21,6 +21,11 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)presentationAkiosDidFinish:(PresentationAkios *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -305,9 +310,18 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailtoStr2]];
             break;
         case 5:
-            NSLog(@"Site Akios");
+            /*NSLog(@"Site Akios");
             NSString *urlAkios = [[NSString stringWithFormat:@"http://www.akios.fr/"] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlAkios]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlAkios]];*/
+            
+            //TEXTE PRESENTATION AKIOS
+            NSLog(@"PRESENTATION AKIOS");
+            PresentationAkios *presAkios = [[PresentationAkios alloc] init];
+            presAkios.delegate = self;
+            presAkios.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+            [self presentModalViewController:presAkios animated:YES];
+            [presAkios release];
+            
             break;
         case 6:
             NSLog(@"Site Agence");

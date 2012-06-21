@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "GeolocViewController.h"
 #import "Coordonnees.h"
+#import "PresentationAkios.h"
 
-@interface ContactViewController : UIViewController <GeolocViewControllerDelegate, CoordonneesDelegate>{
+@interface ContactViewController : UIViewController <GeolocViewControllerDelegate, CoordonneesDelegate, PresentationAkiosDelegate>{
     
 }
 

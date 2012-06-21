@@ -59,6 +59,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheDiaporama:) name:@"afficheDiaporama" object: nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"afficheDiaporamaReady" object: @"afficheDiaporamaReady"];
     
@@ -101,6 +102,7 @@
     diaporama.showsVerticalScrollIndicator = NO;
     [diaporama setAutoresizesSubviews:YES];
     diaporama.contentMode = UIViewContentModeCenter;
+    diaporama.delegate = self;
     
     UIImage *image;
     
@@ -128,8 +130,8 @@
     frameCenter.origin.y = 0;
     [diaporama scrollRectToVisible:frameCenter animated:NO];
     
-    //[self.view addSubview:diaporama];
     [self.view insertSubview:diaporama atIndex:0];
+    diaporama.backgroundColor = [UIColor blackColor];
     /*--- DIAPORAMA ---*/
     [images release];
 }
@@ -145,7 +147,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
 }
 
@@ -211,12 +212,9 @@
 }
 
 - (void) afficheDiaporama:(NSNotification *)notify {
-	//arrayWithIndex = nil;
 	arrayWithIndex = [[ArrayWithIndex alloc] initWithIndexAndArray:[[notify object] arrayIndex]
                                                              array:[[notify object] array]
                                                               info:[[notify object] titre]];
-	//arrayWithIndex.array = [[notify object] array];
-	//arrayWithIndex.arrayIndex = [[notify object] arrayIndex];
 }
 
 - (void)getImages:(NSMutableArray *)tableau {
@@ -235,12 +233,10 @@
 		[imageData release];
 		[image release];
 	}
-	//return tableau;
 }
 
 - (void)done:(id)sender
 {
     [self.delegate diapoControllerDidFinish:self];
 }
-
 @end

@@ -18,6 +18,8 @@
 		8304014915139A3E00D4DEDE /* email-agence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014815139A3E00D4DEDE /* email-agence.txt */; };
 		8304014B15139A4E00D4DEDE /* telephone-agence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014A15139A4E00D4DEDE /* telephone-agence.txt */; };
 		8304014D15139B0200D4DEDE /* coordonnees-globales.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014C15139B0200D4DEDE /* coordonnees-globales.txt */; };
+		831089CA1593838000C746F4 /* PresentationAkios.m in Sources */ = {isa = PBXBuildFile; fileRef = 831089C91593837F00C746F4 /* PresentationAkios.m */; };
+		831089CC1593883200C746F4 /* presentation-akios.txt in Resources */ = {isa = PBXBuildFile; fileRef = 831089CB1593883200C746F4 /* presentation-akios.txt */; };
 		83197C9E13DE15E700FC194F /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83197C9D13DE15E700FC194F /* icone.png */; };
 		832314B21588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */; };
 		832314B51588C050009BD16D /* AfficheAnnonceControllerFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B41588C050009BD16D /* AfficheAnnonceControllerFavoris.m */; };
@@ -204,6 +206,9 @@
 		8304014815139A3E00D4DEDE /* email-agence.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "email-agence.txt"; sourceTree = "<group>"; };
 		8304014A15139A4E00D4DEDE /* telephone-agence.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "telephone-agence.txt"; sourceTree = "<group>"; };
 		8304014C15139B0200D4DEDE /* coordonnees-globales.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "coordonnees-globales.txt"; sourceTree = "<group>"; };
+		831089C81593837F00C746F4 /* PresentationAkios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationAkios.h; sourceTree = "<group>"; };
+		831089C91593837F00C746F4 /* PresentationAkios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationAkios.m; sourceTree = "<group>"; };
+		831089CB1593883200C746F4 /* presentation-akios.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "presentation-akios.txt"; sourceTree = "<group>"; };
 		83197C9D13DE15E700FC194F /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone.png; sourceTree = "<group>"; };
 		832314B01588BD7A009BD16D /* AfficheAnnonceControllerAccueil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceControllerAccueil.h; sourceTree = "<group>"; };
 		832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceControllerAccueil.m; sourceTree = "<group>"; };
@@ -597,6 +602,7 @@
 				8304014C15139B0200D4DEDE /* coordonnees-globales.txt */,
 				83CA32181520CC1900F1D159 /* fax-agence.txt */,
 				8395513615230C740039E5ED /* nom-appli.txt */,
+				831089CB1593883200C746F4 /* presentation-akios.txt */,
 			);
 			path = Conf;
 			sourceTree = "<group>";
@@ -964,6 +970,8 @@
 				83C4CC2913D112EB002CB110 /* AddressAnnotation.m */,
 				83D2C02C158236B1008D79AD /* Coordonnees.h */,
 				83D2C02D158236B1008D79AD /* Coordonnees.m */,
+				831089C81593837F00C746F4 /* PresentationAkios.h */,
+				831089C91593837F00C746F4 /* PresentationAkios.m */,
 			);
 			name = Contact;
 			sourceTree = "<group>";
@@ -1206,6 +1214,7 @@
 				83D2C02B1582350B008D79AD /* bouton-coordonnees.png in Resources */,
 				83D2C030158239DA008D79AD /* bouton-supprimer.png in Resources */,
 				83D2C03215823EE4008D79AD /* bouton-supprimer-recherche.png in Resources */,
+				831089CC1593883200C746F4 /* presentation-akios.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1270,6 +1279,7 @@
 				832314B81588C2F4009BD16D /* AfficheAnnonceControllerModifierFavoris.m in Sources */,
 				832314BB1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m in Sources */,
 				832314BE1588D564009BD16D /* RootViewControllerModifierFavoris.m in Sources */,
+				831089CA1593838000C746F4 /* PresentationAkios.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -57,8 +57,15 @@
     appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     listeAnnonces = appDelegate.favorisView.rechercheMulti.tableauAnnonces1;
-    criteres = appDelegate.favorisView.rechercheMulti.criteres2;
+    //criteres = appDelegate.favorisView.rechercheMulti.criteres2;
 	
+    if (appDelegate.favorisView.rechercheMulti.criteres2 == nil) {
+        criteres = [NSMutableDictionary dictionary];
+    }
+    else {
+        criteres = appDelegate.favorisView.rechercheMulti.criteres2;
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonceReady:) name:@"afficheAnnonceReady" object: nil];
     
     /*UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];

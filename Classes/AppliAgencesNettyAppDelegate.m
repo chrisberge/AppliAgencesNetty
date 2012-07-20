@@ -15,6 +15,7 @@
 @synthesize favorisView, agenceView, contactView;
 @synthesize isAccueil, whichView;
 @synthesize annonceAccueil, annonceMulti, annonceFavoris, annonceBiensFavoris, annonceModifierFavoris;
+@synthesize url_serveur, partenaire, id_agence;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -38,6 +39,10 @@
 	}
 	******************/
 	
+    url_serveur = @"http://www.akios.fr/immobilier/smart_phone.php";
+    partenaire = @"Netty";
+    id_agence = @"agence2000";
+    
     isAccueil = NO;
     
 	// creates your tab bar so you can add everything else to it

@@ -387,7 +387,10 @@
     appDelegate.whichView = @"favoris";
     NSMutableDictionary *criteres1 = [recherchesSauvees objectAtIndex:num];
     
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&";
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&",
+                            appDelegate.url_serveur,
+                            appDelegate.partenaire,
+                            appDelegate.id_agence];
     
     NSEnumerator *enume;
     NSString *key;

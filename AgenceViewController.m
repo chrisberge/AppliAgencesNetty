@@ -75,6 +75,8 @@
 {
     [super viewDidLoad];
     
+    appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheTextReady:) name:@"afficheTextReady" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(coverFlowAgence:) name:@"coverFlowAgence" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonce3Ready:) name:@"afficheAnnonce3Ready" object: nil];
@@ -169,7 +171,6 @@
     
     tableauAnnonces1 = [[NSMutableArray alloc] init];
     
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"agence";
     
     [NSThread detachNewThreadSelector:@selector(printHUD) toTarget:self withObject:nil];
@@ -281,7 +282,11 @@
 	[networkQueue setRequestDidFailSelector:@selector(requestFailed:)];
 	[networkQueue setDelegate:self];
     /*--- QUEUE POUR LES REQUETES HTTP ---*/
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&coverflow=YES";
+    
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&coverflow=YES",
+                            appDelegate.url_serveur,
+                            appDelegate.partenaire,
+                            appDelegate.id_agence];
     
     NSLog(@"bodyString:%@\n",bodyString);
     

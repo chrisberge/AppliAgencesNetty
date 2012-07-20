@@ -117,6 +117,7 @@
     secondLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
     secondLabel.textAlignment = UITextAlignmentLeft;
     secondLabel.backgroundColor = [UIColor clearColor];
+    secondLabel.text = @"";
     
     BOOL criterePrinted = NO;
     

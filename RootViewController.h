@@ -38,6 +38,7 @@
     UILabel *labelNbPiece;
     UILabel *labelBudget;
     int nbRequetes;
+    AppliAgencesNettyAppDelegate *appDelegate;
 }
 
 @property (nonatomic, copy) NSMutableArray *tableauAnnonces1;

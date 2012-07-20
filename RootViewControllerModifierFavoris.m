@@ -13,6 +13,8 @@
 @synthesize tableauAnnonces1, criteres1, criteres2;
 
 - (void)viewDidLoad {
+    appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     /*--- STOCKAGE DES ANNONCES ET CRITERES DE RECHERCHE ---*/
     nbRequetes = 0;
     
@@ -385,7 +387,10 @@
         return;
     }
     
-    NSString *bodyString = @"http://www.akios.fr/immobilier/smart_phone.php?part=Netty&id_agence=agence2000&";
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&",
+                            appDelegate.url_serveur,
+                            appDelegate.partenaire,
+                            appDelegate.id_agence];
     
     NSEnumerator *enume;
     NSString *key;
@@ -662,7 +667,7 @@
                                          otherButtonTitles:nil];
                 [alert show];
                 [alert release];
-                [criteres1 setValue:@"" forKey:@"cp1"];
+                //[criteres1 setValue:@"" forKey:@"cp1"];
             }
         }
         else{
@@ -677,24 +682,6 @@
                 NSLog(@"No Errors on XML parsing.");
             else
                 NSLog(@"Error on XML parsing!!!");
-            
-            NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                                   @"", @"transaction",
-                                                   @"", @"ville1",
-                                                   @"", @"ville2",
-                                                   @"", @"ville3",
-                                                   @"", @"cp1",
-                                                   @"", @"cp2",
-                                                   @"", @"cp3",
-                                                   @"", @"types",
-                                                   @"", @"nbPieces",
-                                                   @"", @"nb_pieces_mini",
-                                                   @"", @"nb_pieces_maxi",
-                                                   @"", @"prix_mini",
-                                                   @"", @"prix_maxi",
-                                                   @"", @"surface_mini",
-                                                   @"", @"surface_maxi",
-                                                   nil];
             
             [self sauvegardeRecherches];
             
@@ -892,7 +879,6 @@
  */
 
 - (void)viewWillAppear:(BOOL)animated {
-    AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"favoris_modifier";
     nbRequetes = 0;
     //AFFICHAGE DES CRITERES CHOISIS

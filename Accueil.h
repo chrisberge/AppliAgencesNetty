@@ -17,7 +17,9 @@
 #import "ProgressViewContoller.h"
 #import "AfficheAnnonceControllerAccueil.h"
 #import "Ville.h"
+#import "Infos.h"
 #import "XMLParserVilles.h"
+#import "XMLParserInfos.h"
 #import "AppliAgencesNettyAppDelegate.h"
 
 @class ASINetworkQueue;
@@ -33,6 +35,7 @@
     ASINetworkQueue *networkQueue;
     NSMutableArray *tableauAnnonces1;
     NSMutableArray *tableauVilles;
+    NSMutableArray *tableauInfos;
     BOOL isConnectionErrorPrinted;
     ProgressViewContoller *pvc;
     Annonce *annonceSelected;
@@ -45,6 +48,7 @@
 @property (nonatomic, assign) NSString *whichView;
 @property (nonatomic, copy) NSMutableArray *tableauAnnonces1;
 @property (nonatomic, copy) NSMutableArray *tableauVilles;
+@property (nonatomic, copy) NSMutableArray *tableauInfos;
 
 -(UIImage *) getImage:(NSString *)cheminImage;
 -(void) makeRequest;

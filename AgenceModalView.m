@@ -97,16 +97,27 @@
     textView.backgroundColor = [UIColor clearColor];
     textView.editable = NO;
     
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
     NSError *error = nil;
     NSString *fullPath;
-    NSString *texte;
+    NSString *texte = nil;
     
     switch ([textIndex intValue]) {
         case 1:
             //[navItem setTitle:@"Historique"];
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"presentation-agence" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"presentation-agence.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
+            
+            NSLog(@"PRES AGENCE: %@", texte);
+            
+            if (texte == nil) {
+            
+                fullPath = [[NSBundle mainBundle] pathForResource:@"presentation-agence" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             textView.text = texte;
             break;

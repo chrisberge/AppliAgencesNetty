@@ -16,6 +16,7 @@
 @synthesize whichView;
 @synthesize tableauAnnonces1;
 @synthesize tableauVilles;
+@synthesize tableauInfos;
 
 
 /*
@@ -89,6 +90,7 @@
     
     tableauAnnonces1 = [[NSMutableArray alloc] init];
     tableauVilles = [[NSMutableArray alloc] init];
+    tableauInfos = [[NSMutableArray alloc] init];
     
     appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.whichView = @"accueil";
@@ -225,6 +227,7 @@
     [myOpenFlowView release];
     [tableauAnnonces1 release];
     [tableauVilles release];
+    [tableauInfos release];
     [networkQueue release];
     [pvc release];
     [super dealloc];
@@ -266,6 +269,21 @@
     [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"villes"] forKey:@"name"]];
     [networkQueue addOperation:request];
     /*--- REQUETE VILLES ET CODES POSTAUX ---*/
+    
+    /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
+    
+    NSString *escapedDate = [(NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)appDelegate.date_maj_appli, NULL, CFSTR("?=&+"), kCFStringEncodingISOLatin1) autorelease];
+    
+    bodyString = [NSString stringWithFormat:@"http://wpc1066.amenworld.com/infos_agences.php?nom_appli=%@&date_maj_appli=%@&infos=YES",
+                  appDelegate.nom_appli,
+                  escapedDate];
+    
+    NSLog(@"bodyString:%@\n",bodyString);
+    
+    request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"infos_agence"] forKey:@"name"]];
+    [networkQueue addOperation:request];
+    /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
     
     [networkQueue go];
 }
@@ -326,14 +344,13 @@
             }
             
             //CORE DATA
-            AppliAgencesNettyAppDelegate *appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
             NSManagedObjectContext *context = appDelegate.managedObjectContext;
             
             for (Ville *uneVille in tableauVilles) {
-                NSLog(@"Ville Acc: %@", uneVille);
+                //NSLog(@"Ville Acc: %@", uneVille);
                 if (uneVille.nom != nil && uneVille.cp != nil) {
-                    NSLog(@"nom: %@", uneVille.nom);
-                    NSLog(@"cp: %@", uneVille.cp);
+                    //NSLog(@"nom: %@", uneVille.nom);
+                    //NSLog(@"cp: %@", uneVille.cp);
                 
                     NSManagedObject *codesPostauxInfo = [NSEntityDescription
                                                          insertNewObjectForEntityForName:@"Codes" 
@@ -360,6 +377,11 @@
 {
     if ([request.userInfo valueForKey:@"name"] == @"villes") {
         [self requestVillesDone:request];
+        return;
+    }
+    
+    if ([request.userInfo valueForKey:@"name"] == @"infos_agence") {
+        [self requestInfosDone:request];
         return;
     }
     
@@ -474,6 +496,137 @@
         isConnectionErrorPrinted = YES;
     }
     [pvc.view removeFromSuperview];
+}
+
+- (void)requestInfosDone:(ASIHTTPRequest *)request
+{
+    NSData *responseData = [request responseData];
+    
+    NSLog(@"(Infos)dataBrute long: %d",[responseData length]);
+    
+    NSString * string = [[NSString alloc] initWithData:responseData encoding:NSISOLatin1StringEncoding];
+    NSLog(@"(Infos)REPONSE DU WEB: \"%@\"\n",string);
+    
+    NSError *error = nil;
+    
+    if ([string length] > 0) {
+        
+        NSUInteger zap = 60;
+        
+        NSData *dataString = [string dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
+        
+        NSData *data = [[NSData alloc] initWithData:[dataString subdataWithRange:NSMakeRange(59, [dataString length] - zap)]];
+        
+        //ON PARSE DU XML
+        
+        /*--- POUR LE TEST OFF LINE ---
+         NSFileManager *fileManager = [NSFileManager defaultManager];
+         NSString *xmlSamplePath = [[NSBundle mainBundle] pathForResource:@"Biens" ofType:@"xml"];
+         data = [fileManager contentsAtPath:xmlSamplePath];
+         string = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+         NSLog(@"REPONSE DU WEB: %@\n",string);
+         */
+        
+        if ([string rangeOfString:@"<infos_agence></infos_agence>"].length != 0) {
+            //INFOS A JOUR
+            NSLog(@"Les infos agence sont à jour.");
+        }
+        else{
+            NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:data];
+            XMLParserInfos *parser = [[XMLParserInfos alloc] initXMLParser];
+            
+            [xmlParser setDelegate:parser];
+            
+            BOOL success = [xmlParser parse];
+            
+            if(success)
+            {
+                NSLog(@"No Errors on XML parsing.");
+            }
+            else
+            {
+                NSLog(@"Error on XML parsing!!!");
+            }
+            
+            NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+            
+            //NSLog(@"tableauInfos: %@", tableauInfos);
+            
+            for (Infos *infosAgence in tableauInfos) {
+                //SAUVEGARDER LES INFOS DANS LES FICHIERS CONF
+                
+                [[infosAgence valueForKey:@"coordonnees_globales"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"coordonnees-globales.txt"]
+                                                                    atomically:YES
+                                                                      encoding:NSUTF8StringEncoding
+                                                                         error:&error];
+                
+                [[infosAgence valueForKey:@"coordonnees_postales"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"coordonnees-postales.txt"]
+                                                                    atomically:YES
+                                                                    encoding:NSUTF8StringEncoding
+                                                                         error:&error];
+                
+                [[infosAgence valueForKey:@"email_agence"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"email-agence.txt"]
+                                                            atomically:YES
+                                                              encoding:NSUTF8StringEncoding
+                                                                 error:&error];
+                
+                [[infosAgence valueForKey:@"fax_agence"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"fax-agence.txt"]
+                                                          atomically:YES
+                                                            encoding:NSUTF8StringEncoding
+                                                               error:&error];
+                
+                [[infosAgence valueForKey:@"nom_appli"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"nom-appli.txt"]
+                                                          atomically:YES
+                                                            encoding:NSUTF8StringEncoding
+                                                               error:&error];
+                
+                [[infosAgence valueForKey:@"presentation_agence"] writeToFile:[directory stringByAppendingPathComponent:@"presentation-agence.txt"]
+                                                                   atomically:YES
+                                                                     encoding:NSUTF8StringEncoding
+                                                                        error:&error];
+                
+                [[infosAgence valueForKey:@"site_agence"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"site-agence.txt"]
+                                                           atomically:YES
+                                                             encoding:NSUTF8StringEncoding
+                                                                error:&error];
+                
+                [[infosAgence valueForKey:@"telephone_agence"] writeToFile:
+                 [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                                                atomically:YES
+                                                                  encoding:NSUTF8StringEncoding
+                                                                     error:&error];
+
+            }
+            
+            [xmlParser release];
+            [parser release];
+            
+            //SAUVEGARDE LA DATE DE MAJ
+            NSDate *now = [[NSDate alloc] init];
+            
+            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+            [format setDateFormat:@"yyyy-MM-dd HH:mm"];
+            
+            appDelegate.date_maj_appli = [format stringFromDate:now];
+            
+            NSMutableDictionary *dictDateMaj = [NSMutableDictionary dictionary];
+            
+            [dictDateMaj setValue:appDelegate.date_maj_appli forKey:@"date_maj"];
+            
+            [dictDateMaj writeToFile:[directory stringByAppendingPathComponent:@"date_maj.plist"] atomically:YES];
+            
+            [now release];
+            [format release];
+
+        }
+        [string release];
+    }
 }
 
 @end

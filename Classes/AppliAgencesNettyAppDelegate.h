@@ -37,6 +37,8 @@
     NSString *url_serveur;
     NSString *partenaire;
     NSString *id_agence;
+    NSString *nom_appli;
+    NSString *date_maj_appli;
 	
 @private
     NSManagedObjectContext *managedObjectContext_;
@@ -61,6 +63,8 @@
 @property (nonatomic, assign) NSString *url_serveur;
 @property (nonatomic, assign) NSString *partenaire;
 @property (nonatomic, assign) NSString *id_agence;
+@property (nonatomic, assign) NSString *nom_appli;
+@property (nonatomic, assign) NSString *date_maj_appli;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

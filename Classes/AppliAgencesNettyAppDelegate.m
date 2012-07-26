@@ -15,7 +15,7 @@
 @synthesize favorisView, agenceView, contactView;
 @synthesize isAccueil, whichView;
 @synthesize annonceAccueil, annonceMulti, annonceFavoris, annonceBiensFavoris, annonceModifierFavoris;
-@synthesize url_serveur, partenaire, id_agence;
+@synthesize url_serveur, partenaire, id_agence, nom_appli, date_maj_appli;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -42,6 +42,25 @@
     url_serveur = @"http://www.akios.fr/immobilier/smart_phone.php";
     partenaire = @"Netty";
     id_agence = @"agence2000";
+    nom_appli = @"bidon01";
+    //nom_appli = @"ETs";
+    
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+	NSMutableDictionary *dicDateMaj;
+    
+    dicDateMaj = [NSMutableDictionary dictionaryWithContentsOfFile:
+                 [directory stringByAppendingPathComponent:@"date_maj.plist"]];
+    
+    if (dicDateMaj != nil) {
+        date_maj_appli = [dicDateMaj valueForKey:@"date_maj"];
+    }
+    else {
+        date_maj_appli = @"1970-01-01";
+        
+        dicDateMaj = [NSMutableDictionary dictionary];
+        [dicDateMaj setValue:date_maj_appli forKey:@"date_maj"];
+        [dicDateMaj writeToFile:[directory stringByAppendingPathComponent:@"date_maj.plist"] atomically:YES];
+    }
     
     isAccueil = NO;
     

@@ -1,16 +1,16 @@
 //
-//  XMLParserVilles.m
-//  AppliAgenceVilles
+//  XMLParserInfos.m
+//  AppliAgencesNetty
 //
-//  Created by Christophe Bergé on 04/04/12.
+//  Created by Christophe Bergé on 25/07/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "XMLParserVilles.h"
+#import "XMLParserInfos.h"
 
-@implementation XMLParserVilles
+@implementation XMLParserInfos
 
-- (XMLParserVilles *) initXMLParser {
+- (XMLParserInfos *) initXMLParser {
     
 	[super init];
 	appDelegate = (AppliAgencesNettyAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -21,9 +21,9 @@
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName
 	attributes:(NSDictionary *)attributeDict {
 	
-	if([elementName isEqualToString:@"ville"]) {
+	if([elementName isEqualToString:@"infos"]) {
 		
-		uneVille = [[Ville alloc] init];
+		infos = [[Infos alloc] init];
 		
 		//Extract the attribute here.
 		//uneAnnonce.idAnnonce = [[attributeDict objectForKey:@"id"] integerValue];
@@ -48,20 +48,25 @@
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
 	
-	if([elementName isEqualToString:@"villes"])
+	if([elementName isEqualToString:@"infos_agence"])
 		return;
     
 	//There is nothing to do if we encounter the Books element here.
 	//If we encounter the Book element howevere, we want to add the book object to the array
 	// and release the object.
-	if([elementName isEqualToString:@"ville"]) {
-        [appDelegate.accueilView.tableauVilles addObject:uneVille];
+	if([elementName isEqualToString:@"infos"]) {
+        [appDelegate.accueilView.tableauInfos addObject:infos];
         
-		[uneVille release];
-		uneVille = nil;
+		[infos release];
+		infos = nil;
 	}
-	else
-		[uneVille setValue:currentElementValue forKey:elementName];
+	else{
+        NSString *elementValueString = currentElementValue;
+        
+        elementValueString = [elementValueString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+		[infos setValue:elementValueString forKey:elementName];
+    }
 	
 	[currentElementValue release];
 	currentElementValue = nil;

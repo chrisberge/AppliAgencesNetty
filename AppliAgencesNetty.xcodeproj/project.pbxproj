@@ -20,6 +20,8 @@
 		8304014D15139B0200D4DEDE /* coordonnees-globales.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8304014C15139B0200D4DEDE /* coordonnees-globales.txt */; };
 		831089CA1593838000C746F4 /* PresentationAkios.m in Sources */ = {isa = PBXBuildFile; fileRef = 831089C91593837F00C746F4 /* PresentationAkios.m */; };
 		831089CC1593883200C746F4 /* presentation-akios.txt in Resources */ = {isa = PBXBuildFile; fileRef = 831089CB1593883200C746F4 /* presentation-akios.txt */; };
+		83196A2915C098EF00939DA6 /* XMLParserInfos.m in Sources */ = {isa = PBXBuildFile; fileRef = 83196A2815C098EF00939DA6 /* XMLParserInfos.m */; };
+		83196A2C15C09A8F00939DA6 /* Infos.m in Sources */ = {isa = PBXBuildFile; fileRef = 83196A2B15C09A8F00939DA6 /* Infos.m */; };
 		83197C9E13DE15E700FC194F /* icone.png in Resources */ = {isa = PBXBuildFile; fileRef = 83197C9D13DE15E700FC194F /* icone.png */; };
 		832314B21588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */; };
 		832314B51588C050009BD16D /* AfficheAnnonceControllerFavoris.m in Sources */ = {isa = PBXBuildFile; fileRef = 832314B41588C050009BD16D /* AfficheAnnonceControllerFavoris.m */; };
@@ -209,6 +211,10 @@
 		831089C81593837F00C746F4 /* PresentationAkios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationAkios.h; sourceTree = "<group>"; };
 		831089C91593837F00C746F4 /* PresentationAkios.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationAkios.m; sourceTree = "<group>"; };
 		831089CB1593883200C746F4 /* presentation-akios.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "presentation-akios.txt"; sourceTree = "<group>"; };
+		83196A2715C098EF00939DA6 /* XMLParserInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserInfos.h; sourceTree = "<group>"; };
+		83196A2815C098EF00939DA6 /* XMLParserInfos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserInfos.m; sourceTree = "<group>"; };
+		83196A2A15C09A8F00939DA6 /* Infos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Infos.h; sourceTree = "<group>"; };
+		83196A2B15C09A8F00939DA6 /* Infos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Infos.m; sourceTree = "<group>"; };
 		83197C9D13DE15E700FC194F /* icone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icone.png; sourceTree = "<group>"; };
 		832314B01588BD7A009BD16D /* AfficheAnnonceControllerAccueil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AfficheAnnonceControllerAccueil.h; sourceTree = "<group>"; };
 		832314B11588BD7B009BD16D /* AfficheAnnonceControllerAccueil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AfficheAnnonceControllerAccueil.m; sourceTree = "<group>"; };
@@ -893,6 +899,8 @@
 			children = (
 				837E5D4D13CC945000CA5776 /* Annonce.h */,
 				837E5D4E13CC945000CA5776 /* Annonce.m */,
+				83196A2A15C09A8F00939DA6 /* Infos.h */,
+				83196A2B15C09A8F00939DA6 /* Infos.m */,
 				83C715AF152DD9C400638B42 /* Ville.h */,
 				83C715B0152DD9C400638B42 /* Ville.m */,
 				837E5D2213CC8CF500CA5776 /* ArrayWithIndex.h */,
@@ -946,6 +954,8 @@
 				83BDABC312A6A41D004E600B /* XMLParser.m */,
 				83C715AC152DD99600638B42 /* XMLParserVilles.h */,
 				83C715AD152DD99600638B42 /* XMLParserVilles.m */,
+				83196A2715C098EF00939DA6 /* XMLParserInfos.h */,
+				83196A2815C098EF00939DA6 /* XMLParserInfos.m */,
 			);
 			name = XML;
 			sourceTree = "<group>";
@@ -1280,6 +1290,8 @@
 				832314BB1588C8F9009BD16D /* AfficheListeAnnoncesControllerModifierFavoris.m in Sources */,
 				832314BE1588D564009BD16D /* RootViewControllerModifierFavoris.m in Sources */,
 				831089CA1593838000C746F4 /* PresentationAkios.m in Sources */,
+				83196A2915C098EF00939DA6 /* XMLParserInfos.m in Sources */,
+				83196A2C15C09A8F00939DA6 /* Infos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1291,8 +1303,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: jc dalmeida (9CF7QCZAY6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: jc dalmeida (9CF7QCZAY6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1300,8 +1312,8 @@
 				GCC_PREFIX_HEADER = AppliAgencesNetty_Prefix.pch;
 				INFOPLIST_FILE = "AppliAgencesNetty-Info.plist";
 				PRODUCT_NAME = AppliAgencesNetty;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "38051DF8-21D9-4139-AB25-B3F7D654E2B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "38051DF8-21D9-4139-AB25-B3F7D654E2B3";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;

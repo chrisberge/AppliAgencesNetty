@@ -125,8 +125,15 @@
     NSString *fullPath;
     NSString *texte;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     labelTelephone.text = texte;
     
@@ -193,10 +200,19 @@
     labelEmail.backgroundColor = [UIColor clearColor];
     
     error = nil;
+     
+     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+     
+     texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"email-agence.txt"]
+     encoding:NSUTF8StringEncoding
+     error:&error];
+     
+     if (texte == nil) {
     
     fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
-    
+     texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
+     
     labelEmail.text = texte;
     
     [self.view addSubview:labelEmail];
@@ -242,6 +258,8 @@
 {
 	UIButton *button = sender;
     
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
 	switch (button.tag) {
         NSError *error = nil;
         NSString *fullPath;
@@ -257,13 +275,18 @@
 		case 2:
             NSLog(@"tel.");
             
-            error = nil;
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            if (texte == nil) {
+                fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             if ([texte rangeOfString:@"+"].length > 0) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:texte]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+                                                            [NSString stringWithFormat:@"tel://%@",texte]]];
             }
             else{
                 
@@ -278,8 +301,15 @@
             NSLog(@"email.");
             error = nil;
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"email-agence.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
+            
+            if (texte == nil) {
+            
+                fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             NSString *htmlBody = [NSString stringWithFormat:@""]; 
             
@@ -295,8 +325,15 @@
             NSLog(@"email recommandation.");
             error = nil;
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"nom-appli" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"nom-appli.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
+            
+            if (texte == nil) {
+            
+                fullPath = [[NSBundle mainBundle] pathForResource:@"nom-appli" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             NSString *htmlBody2 = [NSString stringWithFormat:@""]; 
             
@@ -327,8 +364,15 @@
             NSLog(@"Site Agence");
             error = nil;
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"site-agence" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"site-agence.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
+            
+            if (texte == nil) {
+            
+                fullPath = [[NSBundle mainBundle] pathForResource:@"site-agence" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             NSString *urlAgence = [[NSString stringWithFormat:texte] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlAgence]];

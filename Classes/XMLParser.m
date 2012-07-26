@@ -63,27 +63,6 @@
 	//If we encounter the Book element howevere, we want to add the book object to the array
 	// and release the object.
 	if([elementName isEqualToString:@"bien"]) {
-		//[appDelegate.accueilView.myTableViewController.tableauAnnonces addObject:uneAnnonce];
-        /*if(appDelegate.accueilView.whichView == @"multicriteres")
-            [appDelegate.accueilView.myTableViewController.tableauAnnonces1 addObject:uneAnnonce];
-        
-        if(appDelegate.accueilView.whichView == @"carte")
-            [appDelegate.accueilView.rechercheCarte.tableauAnnonces1 addObject:uneAnnonce];
-        
-        if(appDelegate.accueilView.whichView == @"accueil")
-            [appDelegate.accueilView.tableauAnnonces1 addObject:uneAnnonce];
-        
-        if (appDelegate.favorisView.whichView == @"favoris_modifier") {
-            [appDelegate.favorisView.rechercheMulti.tableauAnnonces1 addObject:uneAnnonce];
-        }
-        
-        if (appDelegate.favorisView.whichView == @"favoris") {
-            [appDelegate.favorisView.tableauAnnonces1 addObject:uneAnnonce];
-        }
-        
-        if (appDelegate.agenceView.whichView == @"agence") {
-            [appDelegate.agenceView.tableauAnnonces1 addObject:uneAnnonce];
-        }*/
         
         if(appDelegate.whichView == @"multicriteres")
             [appDelegate.accueilView.myTableViewController.tableauAnnonces1 addObject:uneAnnonce];

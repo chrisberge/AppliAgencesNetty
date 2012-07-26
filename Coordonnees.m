@@ -79,8 +79,16 @@
     NSString *fullPath;
     NSString *texte;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-globales" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"coordonnees-globales.txt"]
+              encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-globales" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     textView.text = texte;
     

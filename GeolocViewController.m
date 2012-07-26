@@ -94,8 +94,17 @@
     NSString *fullPath;
     NSString *texte;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-postales" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"coordonnees-postales.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-postales" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     CLLocationCoordinate2D location=[self addressLocationWithAddress:texte];
     

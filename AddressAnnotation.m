@@ -20,8 +20,17 @@
     
     error = nil;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-postales" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"coordonnees-postales.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"coordonnees-postales" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     return texte;
 }
 
@@ -32,8 +41,17 @@
     
     error = nil;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"nom-appli" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"nom-appli.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"nom-appli" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     return texte;
 }
 

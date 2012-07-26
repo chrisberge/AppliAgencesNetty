@@ -595,10 +595,15 @@
     NSString *fullPath;
     NSString *texte;
     
-    error = nil;
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    if (texte == nil) {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     texte = [texte stringByReplacingOccurrencesOfString:@"." withString:@" "];
     
@@ -612,8 +617,15 @@
     //FAX
     error = nil;
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"fax-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"fax-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"fax-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     texte = [texte stringByReplacingOccurrencesOfString:@"." withString:@" "];
     
@@ -718,11 +730,18 @@
     NSString *fullPath;
     NSString *texte;
     
-    error = nil;
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"email-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
     
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
+        
     NSString *mailtoPrefix = [[NSString stringWithFormat:@"mailto:%@?subject=Demande d'informations - %@&body=",
                                texte,
                                [lAnnonce valueForKey:@"ref"]] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
@@ -739,13 +758,19 @@
     NSString *fullPath;
     NSString *texte;
     
-    error = nil;
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    if (texte == nil) {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     if ([texte rangeOfString:@"+"].length > 0) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:texte]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+                                                    [NSString stringWithFormat:@"tel://%@",texte]]];
     }
     else{
         
@@ -766,10 +791,16 @@
     NSString *fullPath;
     NSString *texte;
     
-    error = nil;
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"site-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
     
-    fullPath = [[NSBundle mainBundle] pathForResource:@"site-agence" ofType:@"txt"];
-    texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    if (texte == nil) {
+    
+        fullPath = [[NSBundle mainBundle] pathForResource:@"site-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
     
     NSString *htmlBody = [NSString stringWithFormat:
                           @"Plus d'infos sur %@, r&eacute;f&eacute;rence: %@",

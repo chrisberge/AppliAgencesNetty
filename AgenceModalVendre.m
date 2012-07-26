@@ -352,10 +352,17 @@
             NSString *fullPath;
             NSString *texte;
             
-            error = nil;
+            NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
             
-            fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
-            texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"email-agence.txt"]
+                                              encoding:NSUTF8StringEncoding
+                                                 error:&error];
+            
+            if (texte == nil) {
+            
+                fullPath = [[NSBundle mainBundle] pathForResource:@"email-agence" ofType:@"txt"];
+                texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+            }
             
             NSString *mailtoPrefix = [[NSString stringWithFormat:@"mailto:%@?subject=Un client souhaite vendre son bien&body=", texte] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
             

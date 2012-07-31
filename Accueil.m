@@ -244,15 +244,16 @@
     
     /*--- REQUETE COVERFLOW ---*/
     
-    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&coverflow=YES",
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&coverflow=YES&%@",
                             appDelegate.url_serveur,
                             appDelegate.partenaire,
-                            appDelegate.id_agence];
+                            appDelegate.id_agence,
+                            appDelegate.transition];
     
     NSLog(@"bodyString:%@\n",bodyString);
     
     ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"biens recents"] forKey:@"name"]];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:@"biens recents" forKey:@"name"]];
     [networkQueue addOperation:request];
     /*--- REQUETE COVERFLOW ---*/
     
@@ -266,7 +267,7 @@
     NSLog(@"bodyString:%@\n",bodyString);
     
     request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"villes"] forKey:@"name"]];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:@"villes" forKey:@"name"]];
     [networkQueue addOperation:request];
     /*--- REQUETE VILLES ET CODES POSTAUX ---*/
     
@@ -281,7 +282,7 @@
     NSLog(@"bodyString:%@\n",bodyString);
     
     request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"infos_agence"] forKey:@"name"]];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:@"infos_agence" forKey:@"name"]];
     [networkQueue addOperation:request];
     /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
     

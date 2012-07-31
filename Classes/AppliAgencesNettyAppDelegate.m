@@ -16,6 +16,7 @@
 @synthesize isAccueil, whichView;
 @synthesize annonceAccueil, annonceMulti, annonceFavoris, annonceBiensFavoris, annonceModifierFavoris;
 @synthesize url_serveur, partenaire, id_agence, nom_appli, date_maj_appli;
+@synthesize transition;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -42,8 +43,10 @@
     url_serveur = @"http://www.akios.fr/immobilier/smart_phone.php";
     partenaire = @"Netty";
     id_agence = @"agence2000";
-    nom_appli = @"bidon01";
+    //nom_appli = @"bidon01";
     //nom_appli = @"ETs";
+    nom_appli = @"";
+    transition = @"NEW=YES";
     
     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 	NSMutableDictionary *dicDateMaj;

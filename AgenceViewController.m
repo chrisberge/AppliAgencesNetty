@@ -283,10 +283,11 @@
 	[networkQueue setDelegate:self];
     /*--- QUEUE POUR LES REQUETES HTTP ---*/
     
-    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&coverflow=YES",
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&coverflow=YES&%@",
                             appDelegate.url_serveur,
                             appDelegate.partenaire,
-                            appDelegate.id_agence];
+                            appDelegate.id_agence,
+                            appDelegate.transition];
     
     NSLog(@"bodyString:%@\n",bodyString);
     

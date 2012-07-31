@@ -387,10 +387,11 @@
     appDelegate.whichView = @"favoris";
     NSMutableDictionary *criteres1 = [recherchesSauvees objectAtIndex:num];
     
-    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&",
+    NSString *bodyString = [NSString stringWithFormat:@"%@?part=%@&id_agence=%@&%@&",
                             appDelegate.url_serveur,
                             appDelegate.partenaire,
-                            appDelegate.id_agence];
+                            appDelegate.id_agence,
+                            appDelegate.transition];
     
     NSEnumerator *enume;
     NSString *key;

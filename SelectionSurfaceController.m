@@ -46,7 +46,7 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:name object: nil];
     
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    //self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     
     /*--- TEXT VIEWS ---*/
     textMin = [[UITextField alloc] init];
@@ -80,8 +80,8 @@
     [labelMin setText:@"Surface minimum"];
     [labelMax setText:@"Surface maximum"];
     
-    labelMin.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    labelMax.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    //labelMin.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    //labelMax.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     
     [self.view addSubview:labelMin];
     [self.view addSubview:labelMax];

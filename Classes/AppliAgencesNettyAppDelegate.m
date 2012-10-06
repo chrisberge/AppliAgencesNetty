@@ -17,6 +17,8 @@
 @synthesize annonceAccueil, annonceMulti, annonceFavoris, annonceBiensFavoris, annonceModifierFavoris;
 @synthesize url_serveur, partenaire, id_agence, nom_appli, date_maj_appli;
 @synthesize transition;
+@synthesize urlImages;
+@synthesize tableNavController, tableNavControllerFavoris;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -41,12 +43,13 @@
 	******************/
 	
     url_serveur = @"http://www.akios.fr/immobilier/smart_phone.php";
-    partenaire = @"Netty";
-    id_agence = @"agence2000";
-    //nom_appli = @"bidon01";
+    partenaire = @"Transact_Immo";
+    id_agence = @"373";
+    nom_appli = @"COTE_LOIRE_Agence";
     //nom_appli = @"ETs";
-    nom_appli = @"";
+    //nom_appli = @"";
     transition = @"NEW=YES";
+    urlImages = @"http://62.193.226.183:8090/static/media/";
     
     NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 	NSMutableDictionary *dicDateMaj;
@@ -75,7 +78,7 @@
 	accueilView = [[Accueil  alloc] init];
     accueilView.title = @"Accueil";
     
-    UINavigationController *tableNavController = [[[UINavigationController alloc] initWithRootViewController:accueilView] autorelease];
+    tableNavController = [[[UINavigationController alloc] initWithRootViewController:accueilView] autorelease];
 	
     [accueilView release];
     
@@ -87,7 +90,7 @@
 	favorisView = [[Favoris2 alloc] init];
     favorisView.title = @"Favoris";
     
-    UINavigationController *tableNavControllerFavoris = [[[UINavigationController alloc] initWithRootViewController:favorisView] autorelease];
+    tableNavControllerFavoris = [[[UINavigationController alloc] initWithRootViewController:favorisView] autorelease];
 	
     [favorisView release];
     

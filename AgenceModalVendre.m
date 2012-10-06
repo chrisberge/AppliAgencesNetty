@@ -44,13 +44,34 @@
 {
     [super viewDidLoad];
     
-    UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //COULEUR DE FOND
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
     self.view.backgroundColor = fond;
     [fond release];
     //self.view.backgroundColor = [UIColor whiteColor];
     
     //HEADER
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     [enTete release];
@@ -266,67 +287,67 @@
 	switch (button.tag) {
 		case 1:
             NSLog(@"email.");
-            nom = [NSString stringWithString:@"Nom:"];
+            nom = @"Nom:";
             if(nomTF.text == nil){
                 nomTF.text = @"";
             }
             nom = [nom stringByAppendingFormat:@"\t%@\n",nomTF.text];
             
-            prenom = [NSString stringWithString:@"Prenom:"];
+            prenom = @"Prenom:";
             if(prenomTF.text == nil){
                 prenomTF.text = @"";
             }
             prenom = [prenom stringByAppendingFormat:@"\t%@\n",prenomTF.text];
             
-            telephone = [NSString stringWithString:@"Telephone:"];
+            telephone = @"Telephone:";
             if(telephoneTF.text == nil){
                 telephoneTF.text = @"";
             }
             telephone = [telephone stringByAppendingFormat:@"\t%@\n",telephoneTF.text];
             
-            email = [NSString stringWithString:@"Email:"];
+            email = @"Email:";
                 if(emailTF.text == nil){
                     emailTF.text = @"";
                 }
             email = [email stringByAppendingFormat:@"\t%@\n",emailTF.text];
                     
-            type_bien = [NSString stringWithString:@"Type de bien:"];
+            type_bien = @"Type de bien:";
             if(type_bienTF.text == nil){
                 type_bienTF.text = @"";
             }
             type_bien = [type_bien stringByAppendingFormat:@"\t%@\n",type_bienTF.text];
             
-            surface = [NSString stringWithString:@"Surface:"];
+            surface = @"Surface:";
             if(surfaceTF.text == nil){
                 surfaceTF.text = @"";
             }
             surface = [surface stringByAppendingFormat:@"\t%@\n",surfaceTF.text];
             
-            nb_pieces = [NSString stringWithString:@"Nombre de pieces:"];
+            nb_pieces = @"Nombre de pieces:";
             if(nb_piecesTF.text == nil){
                 nb_piecesTF.text = @"";
             }
             nb_pieces = [nb_pieces stringByAppendingFormat:@"\t%@\n",nb_piecesTF.text];
             
-            prix = [NSString stringWithString:@"Prix:"];
+            prix = @"Prix:";
             if(prixTF.text == nil){
                 prixTF.text = @"";
             }
             prix = [prix stringByAppendingFormat:@"\t%@\n",prixTF.text];
             
-            adresse = [NSString stringWithString:@"Adresse:"];
+            adresse = @"Adresse:";
             if(adresseTF.text == nil){
                 adresseTF.text = @"";
             }
             adresse = [adresse stringByAppendingFormat:@"\t%@\n",adresseTF.text];
             
-            code_postal = [NSString stringWithString:@"Code Postal:"];
+            code_postal = @"Code Postal:";
             if(code_postalTF.text == nil){
                 code_postalTF.text = @"";
             }
             code_postal = [code_postal stringByAppendingFormat:@"\t%@\n",code_postalTF.text];
             
-            ville = [NSString stringWithString:@"Ville:"];
+            ville = @"Ville:";
             if(villeTF.text == nil){
                 villeTF.text = @"";
             }

@@ -17,7 +17,15 @@
             nom_appli,
             presentation_agence,
             site_agence,
-            telephone_agence;
+            telephone_agence,
+            header_image,
+            background_image,
+            icone_image,
+            default_image,
+            footer_biens_image,
+            footer_favoris_image,
+            footer_agence_image,
+            footer_contact_image;
 
 - (void) dealloc {
     [coordonnees_globales release];
@@ -28,6 +36,14 @@
     [presentation_agence release];
     [site_agence release];
     [telephone_agence release];
+    [header_image release];
+    [background_image release];
+    [icone_image release];
+    [default_image release];
+    [footer_biens_image release];
+    [footer_favoris_image release];
+    [footer_agence_image release];
+    [footer_contact_image release];
     [super dealloc]; 
 }
 

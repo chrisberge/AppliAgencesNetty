@@ -63,14 +63,34 @@
 {
     [super viewDidLoad];
     
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
     //COULEUR DE FOND
-    UIColor *fond = /*[UIColor whiteColor]*/[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
     self.view.backgroundColor = fond;
     [fond release];
     //self.view.backgroundColor = [UIColor whiteColor];
     
     //HEADER
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     [enTete release];
@@ -125,7 +145,6 @@
     NSString *fullPath;
     NSString *texte;
     
-    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
                                       encoding:NSUTF8StringEncoding
                                          error:&error];
@@ -374,7 +393,7 @@
                 texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
             }
             
-            NSString *urlAgence = [[NSString stringWithFormat:texte] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
+            NSString *urlAgence = [[NSString stringWithFormat:@"%@",texte] stringByAddingPercentEscapesUsingEncoding:NSISOLatin1StringEncoding];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlAgence]];
             break;
         case 7:

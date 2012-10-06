@@ -29,6 +29,68 @@
 }
 */
 
+-(void) updateImages{
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //HEADER
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
+    [enTete setFrame:CGRectMake(0,0,320,50)];
+    [self.view addSubview:enTete];
+    [enTete release];
+    
+    //BACKGROUND
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
+    self.view.backgroundColor = fond;
+    [fond release];
+    
+    //FOOTER
+    //BIENS
+    UIImage *footerBiensImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"footer_biens.png"]]];
+    if (footerBiensImage != nil) {
+        [appDelegate.tableNavController.tabBarItem setImage:footerBiensImage];
+    }
+    
+    //FAVORIS
+    UIImage *footerFavorisImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                        [directory stringByAppendingPathComponent:@"footer_favoris.png"]]];
+    if (footerFavorisImage != nil) {
+        [appDelegate.tableNavController.tabBarItem setImage:footerFavorisImage];
+    }
+    
+    //AGENCE
+    UIImage *footerAgenceImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                          [directory stringByAppendingPathComponent:@"footer_agence.png"]]];
+    if (footerAgenceImage != nil) {
+        [appDelegate.tableNavController.tabBarItem setImage:footerAgenceImage];
+    }
+    
+    //CONTACT
+    UIImage *footerContactImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                         [directory stringByAppendingPathComponent:@"footer_contact.png"]]];
+    if (footerContactImage != nil) {
+        [appDelegate.tableNavController.tabBarItem setImage:footerContactImage];
+    }
+}
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 
@@ -39,7 +101,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonceReady:) name:@"afficheAnnonceReady" object: nil];
     
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,480)];
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //COULEUR DE FOND
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
+    self.view.backgroundColor = fond;
+    [fond release];
+    
+    //HEADER
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     [enTete release];
@@ -122,10 +211,6 @@
     /*--- REALISATION AKIOS ---*/
     
 	[self.view setUserInteractionEnabled:YES];
-	
-    UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    self.view.backgroundColor = fond;
-    [fond release];
     
 	[super viewDidLoad];
 }
@@ -602,7 +687,106 @@
                                                                 atomically:YES
                                                                   encoding:NSUTF8StringEncoding
                                                                      error:&error];
-
+                
+                //IMAGES
+                //HEADER
+                NSString *headerImageString = [NSString stringWithFormat:@"%@%@",
+                                               appDelegate.urlImages,
+                                               [infosAgence valueForKey:@"header_image"]];
+                
+                NSURL *headerImageUrl = [NSURL URLWithString:headerImageString];
+                
+                NSData *headerImageData = [NSData dataWithContentsOfURL:headerImageUrl];
+                
+                if (headerImageData != nil) {
+                    
+                    [headerImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"header.png"]
+                                      atomically:YES];
+                }
+                
+                //BACKGROUND
+                NSString *backgroundImageString = [NSString stringWithFormat:@"%@%@",
+                                               appDelegate.urlImages,
+                                               [infosAgence valueForKey:@"background_image"]];
+                
+                NSURL *backgroundImageUrl = [NSURL URLWithString:backgroundImageString];
+                
+                NSData *backgroundImageData = [NSData dataWithContentsOfURL:backgroundImageUrl];
+                
+                if (backgroundImageData != nil) {
+                    
+                    [backgroundImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"background.png"]
+                                      atomically:YES];
+                }
+                
+                //FOOTER
+                //BIENS
+                NSString *footerBiensImageString = [NSString stringWithFormat:@"%@%@",
+                                                   appDelegate.urlImages,
+                                                   [infosAgence valueForKey:@"footer_biens_image"]];
+                
+                NSURL *footerBiensImageUrl = [NSURL URLWithString:footerBiensImageString];
+                
+                NSData *footerBiensImageData = [NSData dataWithContentsOfURL:footerBiensImageUrl];
+                
+                if (footerBiensImageData != nil) {
+                    
+                    [footerBiensImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"footer_biens.png"]
+                                          atomically:YES];
+                }
+                
+                //FAVORIS
+                NSString *footerFavorisImageString = [NSString stringWithFormat:@"%@%@",
+                                                    appDelegate.urlImages,
+                                                    [infosAgence valueForKey:@"footer_favoris_image"]];
+                
+                NSURL *footerFavorisImageUrl = [NSURL URLWithString:footerFavorisImageString];
+                
+                NSData *footerFavorisImageData = [NSData dataWithContentsOfURL:footerFavorisImageUrl];
+                
+                if (footerFavorisImageData != nil) {
+                    
+                    [footerFavorisImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"footer_favoris.png"]
+                                           atomically:YES];
+                }
+                
+                //AGENCE
+                NSString *footerAgenceImageString = [NSString stringWithFormat:@"%@%@",
+                                                      appDelegate.urlImages,
+                                                      [infosAgence valueForKey:@"footer_agence_image"]];
+                
+                NSURL *footerAgenceImageUrl = [NSURL URLWithString:footerAgenceImageString];
+                
+                NSData *footerAgenceImageData = [NSData dataWithContentsOfURL:footerAgenceImageUrl];
+                
+                if (footerAgenceImageData != nil) {
+                    
+                    [footerAgenceImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"footer_agence.png"]
+                                             atomically:YES];
+                }
+                
+                //CONTACT
+                NSString *footerContactImageString = [NSString stringWithFormat:@"%@%@",
+                                                     appDelegate.urlImages,
+                                                     [infosAgence valueForKey:@"footer_contact_image"]];
+                
+                NSURL *footerContactImageUrl = [NSURL URLWithString:footerContactImageString];
+                
+                NSData *footerContactImageData = [NSData dataWithContentsOfURL:footerContactImageUrl];
+                
+                if (footerContactImageData != nil) {
+                    
+                    [footerContactImageData writeToFile:
+                     [directory stringByAppendingPathComponent:@"footer_contact.png"]
+                                            atomically:YES];
+                }
+                
+                [self updateImages];
             }
             
             [xmlParser release];

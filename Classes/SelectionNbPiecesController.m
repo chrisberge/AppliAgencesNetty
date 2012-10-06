@@ -60,9 +60,9 @@
     
     [self.tableView reloadData];
     
-    UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    /*UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     self.view.backgroundColor = fond;
-    [fond release];
+    [fond release];*/
     
     //BOUTON RETOUR
     UIButton *boutonRetour = [UIButton buttonWithType:UIButtonTypeCustom];

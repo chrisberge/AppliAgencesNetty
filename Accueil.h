@@ -52,5 +52,6 @@
 
 -(UIImage *) getImage:(NSString *)cheminImage;
 -(void) makeRequest;
+-(void) updateImages;
 
 @end

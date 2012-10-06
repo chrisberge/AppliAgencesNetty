@@ -61,7 +61,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:name object: nil];
     
     //HEADER
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     [enTete release];

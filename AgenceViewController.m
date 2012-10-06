@@ -81,14 +81,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(coverFlowAgence:) name:@"coverFlowAgence" object: nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(afficheAnnonce3Ready:) name:@"afficheAnnonce3Ready" object: nil];
     
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
     //COULEUR DE FOND
-    UIColor *fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
     self.view.backgroundColor = fond;
     [fond release];
     //self.view.backgroundColor = [UIColor whiteColor];
     
     //HEADER
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     [enTete release];

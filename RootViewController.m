@@ -97,9 +97,34 @@
     
     /*--- INTERFACE GRAPHIQUE ---*/
 	self.view = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,480)];
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
     
-    UIImageView *enTete = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.png"]];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //COULEUR DE FOND
+    UIImage *fondImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                 [directory stringByAppendingPathComponent:@"background.png"]]];
+    
+    UIColor *fond;
+    
+    if (fondImage != nil) {
+        fond = [[UIColor alloc] initWithPatternImage:fondImage];
+    }
+    else{
+        fond = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"background.png"]];
+    }
+    
+    self.view.backgroundColor = fond;
+    [fond release];
+    
+    //HEADER
+    UIImage *enTeteImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:
+                                                   [directory stringByAppendingPathComponent:@"header.png"]]];
+    
+    if (enTeteImage == nil) {
+        enTeteImage = [UIImage imageNamed:@"header.png"];
+    }
+    
+    UIImageView *enTete = [[UIImageView alloc] initWithImage:enTeteImage];
     [enTete setFrame:CGRectMake(0,0,320,50)];
     [self.view addSubview:enTete];
     
@@ -423,7 +448,7 @@
     NSLog(@"bodyString:%@\n",bodyString);
 
     ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
-    [request setUserInfo:[NSDictionary dictionaryWithObject:[NSString stringWithString:@"recherche multicriteres"] forKey:@"name"]];
+    [request setUserInfo:[NSDictionary dictionaryWithObject:@"recherche multicriteres" forKey:@"name"]];
     [networkQueue addOperation:request];
 
     [networkQueue go];

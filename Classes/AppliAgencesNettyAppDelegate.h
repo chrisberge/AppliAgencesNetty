@@ -40,6 +40,9 @@
     NSString *nom_appli;
     NSString *date_maj_appli;
     NSString *transition;
+    NSString *urlImages;
+    UINavigationController *tableNavController;
+    UINavigationController *tableNavControllerFavoris;
 	
 @private
     NSManagedObjectContext *managedObjectContext_;
@@ -67,6 +70,9 @@
 @property (nonatomic, assign) NSString *nom_appli;
 @property (nonatomic, assign) NSString *date_maj_appli;
 @property (nonatomic, assign) NSString *transition;
+@property (nonatomic, assign) NSString *urlImages;
+@property (nonatomic, assign) UINavigationController *tableNavController;
+@property (nonatomic, assign) UINavigationController *tableNavControllerFavoris;
 
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;

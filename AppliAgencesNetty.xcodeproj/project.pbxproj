@@ -191,6 +191,7 @@
 		83EF0E2D14FE6D0B00775FD9 /* coverflow-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EF0E2C14FE6D0B00775FD9 /* coverflow-background.png */; };
 		83EF0E2F14FE73E500775FD9 /* visitez-notre-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EF0E2E14FE73E500775FD9 /* visitez-notre-site.png */; };
 		83EF0E3114FE799800775FD9 /* bandeau-favoris.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EF0E3014FE799800775FD9 /* bandeau-favoris.png */; };
+		83F28C0D16286C6A008D8C4D /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 83F28C0C16286C6A008D8C4D /* refresh.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -441,6 +442,7 @@
 		83EF0E2C14FE6D0B00775FD9 /* coverflow-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coverflow-background.png"; sourceTree = "<group>"; };
 		83EF0E2E14FE73E500775FD9 /* visitez-notre-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visitez-notre-site.png"; sourceTree = "<group>"; };
 		83EF0E3014FE799800775FD9 /* bandeau-favoris.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bandeau-favoris.png"; sourceTree = "<group>"; };
+		83F28C0C16286C6A008D8C4D /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AppliAgencesNetty-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AppliAgencesNetty-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -661,6 +663,7 @@
 				83EF0E2A14FE696000775FD9 /* bandeau-accueil.png */,
 				83EF0E2C14FE6D0B00775FD9 /* coverflow-background.png */,
 				8386BF5613E14A6D00BF91AB /* recherche-multicriteres.png */,
+				83F28C0C16286C6A008D8C4D /* refresh.png */,
 			);
 			name = Accueil;
 			sourceTree = "<group>";
@@ -1225,6 +1228,7 @@
 				83D2C030158239DA008D79AD /* bouton-supprimer.png in Resources */,
 				83D2C03215823EE4008D79AD /* bouton-supprimer-recherche.png in Resources */,
 				831089CC1593883200C746F4 /* presentation-akios.txt in Resources */,
+				83F28C0D16286C6A008D8C4D /* refresh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

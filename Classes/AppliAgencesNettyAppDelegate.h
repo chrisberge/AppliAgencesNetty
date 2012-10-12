@@ -68,7 +68,6 @@
 @property (nonatomic, assign) NSString *partenaire;
 @property (nonatomic, assign) NSString *id_agence;
 @property (nonatomic, assign) NSString *nom_appli;
-@property (nonatomic, assign) NSString *date_maj_appli;
 @property (nonatomic, assign) NSString *transition;
 @property (nonatomic, assign) NSString *urlImages;
 @property (nonatomic, assign) UINavigationController *tableNavController;

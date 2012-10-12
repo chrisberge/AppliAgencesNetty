@@ -172,9 +172,29 @@
 	[self.view addSubview:boutonRecherche];
 	//[self.view addSubview:boutonCarte];
 	
-    /*--- BIENS RECENTS  + VILLES ---*/
+    /*--- BOUTON REFRESH POUR LES INFOS AGENCE ---*/
+    UIButton *boutonRefresh = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    //REQUETE HTTP POUR AVOIR LES BIENS RECENTS + VILLES
+    boutonRefresh.tag = 3;
+	
+	[boutonRefresh setFrame:CGRectMake(270, 75, 30, 30)];
+	
+	[boutonRefresh setUserInteractionEnabled:YES];
+	
+    boutonRefresh.showsTouchWhenHighlighted = NO;
+    
+	[boutonRefresh addTarget:self action:@selector(buttonPushed:)
+              forControlEvents:UIControlEventTouchUpInside];
+	
+	image = [self getImage:@"refresh"];
+	[boutonRefresh setImage:image forState:UIControlStateNormal];
+	
+	[self.view addSubview:boutonRefresh];
+    /*--- BOUTON REFRESH POUR LES INFOS AGENCE ---*/
+    
+    /*--- BIENS RECENTS  + VILLES + INFOS AGENCE ---*/
+    
+    //REQUETE HTTP POUR AVOIR LES BIENS RECENTS + VILLES + INFOS AGENCE
     isConnectionErrorPrinted = NO;
     
     tableauAnnonces1 = [[NSMutableArray alloc] init];
@@ -194,7 +214,7 @@
     [self.view addSubview:nosBiens];
     [nosBiens release];
     
-    /*--- BIENS RECENTS  + VILLES ---*/
+    /*--- BIENS RECENTS  + VILLES + INFOS AGENCE ---*/
     
     /*--- REALISATION AKIOS ---*/
     //LABEL
@@ -250,6 +270,9 @@
             rechercheCarte.title = @"Recherche sur la carte";
             [self.navigationController pushViewController:rechercheCarte animated:YES];
             [rechercheCarte release];
+            break;
+        case 3:
+            [self makeRequestInfosAgence];
             break;
 		default:
 			break;
@@ -356,17 +379,46 @@
     [networkQueue addOperation:request];
     /*--- REQUETE VILLES ET CODES POSTAUX ---*/
     
+    [networkQueue go];
+    
+    /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
+    [self makeRequestInfosAgence];
+     /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
+}
+
+- (void)makeRequestInfosAgence{
     /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
     
-    NSString *escapedDate = [(NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)appDelegate.date_maj_appli, NULL, CFSTR("?=&+"), kCFStringEncodingISOLatin1) autorelease];
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+	NSMutableDictionary *dicDateMaj;
     
-    bodyString = [NSString stringWithFormat:@"http://wpc1066.amenworld.com/infos_agences.php?nom_appli=%@&date_maj_appli=%@&infos=YES",
+    dicDateMaj = [NSMutableDictionary dictionaryWithContentsOfFile:
+                  [directory stringByAppendingPathComponent:@"date_maj.plist"]];
+    
+    NSString *date_maj_appli;
+    
+    if (dicDateMaj != nil) {
+        date_maj_appli = [dicDateMaj valueForKey:@"date_maj"];
+    }
+    else {
+        date_maj_appli = @"1970-01-01";
+        
+        dicDateMaj = [NSMutableDictionary dictionary];
+        [dicDateMaj setValue:date_maj_appli forKey:@"date_maj"];
+        [dicDateMaj writeToFile:[directory stringByAppendingPathComponent:@"date_maj.plist"] atomically:YES];
+    }
+    
+    //NSLog(@"DATE MAJ AVANT: %@\n", date_maj_appli);
+    
+    NSString *escapedDate = [(NSString*)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)date_maj_appli, NULL, CFSTR("?=&+"), kCFStringEncodingISOLatin1) autorelease];
+    
+    NSString *bodyString = [NSString stringWithFormat:@"http://wpc1066.amenworld.com/infos_agences.php?nom_appli=%@&date_maj_appli=%@&infos=YES",
                   appDelegate.nom_appli,
                   escapedDate];
     
     NSLog(@"bodyString:%@\n",bodyString);
     
-    request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
+    ASIHTTPRequest *request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:bodyString]] autorelease];
     [request setUserInfo:[NSDictionary dictionaryWithObject:@"infos_agence" forKey:@"name"]];
     [networkQueue addOperation:request];
     /*--- REQUETE MISE A JOUR INFOS AGENCE ---*/
@@ -798,16 +850,16 @@
             NSDateFormatter *format = [[NSDateFormatter alloc] init];
             [format setDateFormat:@"yyyy-MM-dd HH:mm"];
             
-            appDelegate.date_maj_appli = [format stringFromDate:now];
-            
             NSMutableDictionary *dictDateMaj = [NSMutableDictionary dictionary];
             
-            [dictDateMaj setValue:appDelegate.date_maj_appli forKey:@"date_maj"];
+            [dictDateMaj setValue:[format stringFromDate:now] forKey:@"date_maj"];
             
             [dictDateMaj writeToFile:[directory stringByAppendingPathComponent:@"date_maj.plist"] atomically:YES];
             
             [now release];
             [format release];
+            
+            //NSLog(@"DATE MAJ APRES: %@\n", appDelegate.date_maj_appli);
 
         }
         [string release];

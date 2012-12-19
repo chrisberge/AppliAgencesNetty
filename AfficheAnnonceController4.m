@@ -370,6 +370,7 @@
     if ([lettreCE length] == 0) {
         UILabel *bilanCeNC = [[UILabel alloc] initWithFrame:CGRectMake(10, 480, 250, 20)];
         bilanCeNC.font = [UIFont fontWithName:@"Arial" size:12];
+        bilanCeNC.backgroundColor = [UIColor clearColor];
         bilanCeNC.text = @"NC";
         [scrollView addSubview:bilanCeNC];
     }
@@ -489,6 +490,7 @@
     if ([lettreGES length] == 0) {
         UILabel *bilanGesNC = [[UILabel alloc] initWithFrame:CGRectMake(10, nextY, 250, 20)];
         bilanGesNC.font = [UIFont fontWithName:@"Arial" size:12];
+        bilanGesNC.backgroundColor = [UIColor clearColor];
         bilanGesNC.text = @"NC";
         [scrollView addSubview:bilanGesNC];
         

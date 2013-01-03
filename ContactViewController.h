@@ -12,6 +12,7 @@
 #import "PresentationAkios.h"
 
 @interface ContactViewController : UIViewController <GeolocViewControllerDelegate, CoordonneesDelegate, PresentationAkiosDelegate>{
+    UILabel *labelTelephone;
     
 }
 

@@ -136,9 +136,8 @@
     /*--- BOUTON TELEPHONE ---*/
     
     /*--- LABEL TELEPHONE ---*/
-    UILabel *labelTelephone = [[UILabel alloc] initWithFrame:CGRectMake(45, 205, 135, 30)];
+    labelTelephone = [[UILabel alloc] initWithFrame:CGRectMake(45, 205, 135, 30)];
     labelTelephone.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
-    //labelTelephone.textColor = [UIColor whiteColor];
     labelTelephone.backgroundColor = [UIColor clearColor];
     
     NSError *error = nil;
@@ -157,8 +156,6 @@
     labelTelephone.text = texte;
     
     [self.view addSubview:labelTelephone];
-    
-    [labelTelephone release];
     /*--- LABEL TELEPHONE ---*/
     
     /*--- BOUTON SITE AGENCE ---*/
@@ -420,6 +417,29 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    NSError *error = nil;
+    NSString *fullPath;
+    NSString *texte;
+    
+    texte = [NSString stringWithContentsOfFile: [directory stringByAppendingPathComponent:@"telephone-agence.txt"]
+                                      encoding:NSUTF8StringEncoding
+                                         error:&error];
+    
+    if (texte == nil) {
+        fullPath = [[NSBundle mainBundle] pathForResource:@"telephone-agence" ofType:@"txt"];
+        texte = [NSString stringWithContentsOfFile:fullPath encoding:NSUTF8StringEncoding error:&error];
+    }
+    
+    labelTelephone.text = texte;
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [labelTelephone release];
 }
 
 @end
